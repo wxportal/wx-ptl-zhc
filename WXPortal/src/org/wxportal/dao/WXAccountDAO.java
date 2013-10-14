@@ -95,7 +95,7 @@ public class WXAccountDAO extends HibernateBasicMethod {
 	 * @return
 	 */
 	public ArrayList<WXAccountBean> queryWXAccounts(int userId,int page,int pageSize){
-		return (ArrayList<WXAccountBean>)super.query("WXAccountBean", "userid", userId, page, pageSize);
+		return (ArrayList<WXAccountBean>)super.query("WXAccountBean", "user.userid", userId, page, pageSize);
 	}
 
 }
