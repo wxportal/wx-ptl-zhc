@@ -38,7 +38,7 @@ public class HibernateSessionFactory {
 		Session session = threadLocal.get();
 		if (session == null || !session.isOpen()) {
 			if (sessionFactory == null) {
-				rebuildSessionFactory();
+				//rebuildSessionFactory();
 			}
 			session = sessionFactory.openSession();
 		} else {

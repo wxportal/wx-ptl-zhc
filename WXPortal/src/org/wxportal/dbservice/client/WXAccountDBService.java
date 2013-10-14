@@ -38,6 +38,9 @@ public class WXAccountDBService {
 	 * 新增一个微信账号
 	 * 
 	 * @param wxaccount
+	 * return:
+	 *       -1:失败
+	 *       大于0的一个整数：成功，返回是的是当前生成的id
 	 */
 	public int addWXAccount(WXAccountBean wxaccount) {
 		return dao.save(wxaccount);

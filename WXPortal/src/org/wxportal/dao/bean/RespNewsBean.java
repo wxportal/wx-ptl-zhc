@@ -68,14 +68,6 @@ public class RespNewsBean {
 		this.title = title;
 	}
 
-	public String getDescribe() {
-		return description;
-	}
-
-	public void setDescribe(String description) {
-		this.description = description;
-	}
-
 	public String getPicUrl() {
 		return picUrl;
 	}
@@ -90,6 +82,14 @@ public class RespNewsBean {
 
 	public void setLinkUrl(String linkUrl) {
 		this.linkUrl = linkUrl;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

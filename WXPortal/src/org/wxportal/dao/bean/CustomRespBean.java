@@ -13,7 +13,7 @@ public class CustomRespBean {
 	
 	private String reqContent;//请求的内容，如‘菜单’等关键字
 	
-	private String respType;//后台配置信息是定义的类型，如是回复还是命令。。
+	private String respType;//后台配置信息是定义的类型，如是回复还是命令..
 	
 	private String reqKey;//回复的具体内容对应的Key
 	
