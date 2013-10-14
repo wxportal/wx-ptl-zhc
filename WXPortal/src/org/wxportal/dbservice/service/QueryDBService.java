@@ -34,15 +34,16 @@ public class QueryDBService {
 	 *        使用时依据reqType将Bean转成对应的类型.
 	 *        否则 key="" value = "error";
 	 */
-	public Map query(String reqChar,String reqContent,int wxAccountId){
+     
+	public List queryInfo(String reqChar,String reqContent,int wxAccountId){
 		String s = StringType.getType(reqChar, reqContent, wxAccountId);
-		String type = s.split("@")[0];
-		String reqKey = s.split("@")[1];
-		if("05".equals(type)){
-			return this.queryNews(wxAccountId, type, reqKey);
-		}else{
-			return this.queryInfo(wxAccountId, type, reqKey);
+		String sTyep = "";
+		String reqKey = "";
+		if(s.contains("@")){
+			sTyep = s.split("@")[0];
+			reqKey = s.split("@")[1];
 		}
+		return this.query(wxAccountId, sTyep, reqKey);
 	}
 	/**
 	 * 依据请求参数查询用户自定义的非新闻回复
@@ -51,63 +52,92 @@ public class QueryDBService {
 	 * @param wxAccountId
 	 * @return
 	 */
-	private HashMap<String,Object> queryInfo(int wxAccountId,String type,String reqKey){
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		if("01".equals(type)){
+	private List query(int wxAccountId,String type,String reqKey){
+		String sFlag = "false";
+		String sType = "";
+		List list = null;
+		if("text".equals(type)){
 			RespTextDAO dao = new RespTextDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			List list  = dao.queryByCondition("RespTextBean", whereCause, 0, 0);
-			map.put(type, list.get(0));
-			return map;
+			list  = dao.queryByCondition("RespTextBean", whereCause, 0, 0);
+			if(list.size()>0){
+				sFlag = "true";
+				sType = "Text";
+			}
+			return this.toList(list, type, sFlag);
 		}
-		if("02".equals(type)){
+		if("music".equals(type)){
 			RespMusicDAO dao = new RespMusicDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			List list  = dao.queryByCondition("RespMusicBean", whereCause, 0, 0);
-			map.put(type, list.get(0));
-			return map;
+			list  = dao.queryByCondition("RespMusicBean", whereCause, 0, 0);
+			if(list.size()>0){
+				sFlag = "true";
+				sType = "Music";
+			}
+			return this.toList(list, type, sFlag);
 		}
-		if("03".equals(type)){
+		if("image".equals(type)){
 			RespImageDAO dao = new RespImageDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			List list  = dao.queryByCondition("RespImageBean", whereCause, 0, 0);
-			map.put(type, list.get(0));
-			return map;
+			list  = dao.queryByCondition("RespImageBean", whereCause, 0, 0);
+			if(list.size()>0){
+				sFlag = "true";
+				sType = "Image";
+			}
+			return this.toList(list, type, sFlag);
 		}
-		if("04".equals(type)){
+		if("link".equals(type)){
 			RespLinkDAO dao = new RespLinkDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			List list  = dao.queryByCondition("RespLinkBean", whereCause, 0, 0);
-			map.put(type, list.get(0));
-			return map;
+			list  = dao.queryByCondition("RespLinkBean", whereCause, 0, 0);
+			if(list.size()>0){
+				sFlag = "true";
+				sType = "Link";
+			}
+			return this.toList(list, type, sFlag);
 		}
-		if("06".equals(type)){
+		if("news".equals(type)){
+			RespNewsDAO dao = new RespNewsDAO();
+			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
+			list = dao.queryByCondition("RespNewsBean", whereCause, 0, 0);
+			if(list.size()>0){
+				sFlag = "true";
+				sType = "News";
+			}
+			return this.toList(list, type, sFlag);
+		}
+		if("function".equals(type)){
 			RespFunctionDAO dao = new RespFunctionDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			List list  = dao.queryByCondition("RespFunctionBean", whereCause, 0, 0);
-			map.put(type, list.get(0));
-			return map;
+			list  = dao.queryByCondition("RespFunctionBean", whereCause, 0, 0);
+			if(list.size()>0){
+				sFlag = "true";
+				sType = "Function";
+			}
+			return this.toList(list, type, sFlag);
 		}
-		map.put("", "error");
-		return map;
+		return this.toList(list, type, sFlag);
 	}
 	
    
 	/**
-	 * 回复新闻相关查询
-	 * @param wxAccountId
-	 * @param type
-	 * @param reqKey
+	 * 拼接成返回的结果list
+	 * @param list
+	 * @param sType
+	 * @param sFlag
 	 * @return
 	 */
-	private HashMap<String,List> queryNews(int wxAccountId,String type,String reqKey){
-		List list = new ArrayList<RespNewsBean>();
-		HashMap<String,List> map = new HashMap<String,List>();
-		RespNewsDAO dao = new RespNewsDAO();
-		String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-		list = dao.queryByCondition("RespNewsBean", whereCause, 0, 0);
-		map.put(type, list);
-		return map;
+	private List toList(List list,String sType,String sFlag){
+		List result = null;
+		result.add(sFlag);
+		result.add(sType);
+		if(list.size()>0){
+			for(Object obj:list){
+				result.add(obj);
+			}
+		}
+		return result;
+		
 	}
 	
 }

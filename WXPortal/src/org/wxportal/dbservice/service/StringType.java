@@ -1,7 +1,6 @@
 package org.wxportal.dbservice.service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -45,13 +44,14 @@ public class StringType {
 		list = (ArrayList<CustomRespBean>)query.list();
 		session.getTransaction().commit();
 		session.close();
+		if(list.size()>0){
 		String type = list.get(0).getRespType();
 		String reqKey = list.get(0).getReqKey();
 		return type+"@"+reqKey;
-	}
-	
-	public CustomRespDAO getDao() {
-		return dao;
+		}else{
+			return "";
+		}
+		
 	}
 	
 }
