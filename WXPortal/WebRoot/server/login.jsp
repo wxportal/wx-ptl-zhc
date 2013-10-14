@@ -14,8 +14,10 @@
 	String curPage = (String) request.getParameter("curPage");
 
 	UserDBService userDBService = new UserDBService();
-	if (userDBService.login(username, password)) {
-		request.getSession().setAttribute("isLogin", "true");
+	
+	UserBean user = userDBService.login(username, password);
+	if (user != null) {
+		request.getSession().setAttribute("user", user);
 		request.getSession().setAttribute("nickname", username);
 		response.sendRedirect("/WXPortal/" + curPage + ".jsp");
 	} else {

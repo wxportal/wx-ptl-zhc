@@ -30,9 +30,11 @@
 		userBean.setPassWord(password);
 		userBean.setEmail(email);
 
-		userDBService.addUser(userBean);
+		int userId = userDBService.addUser(userBean);
+		
+		userBean.setId(userId);
 
-		request.getSession().setAttribute("isLogin", "true");
+		request.getSession().setAttribute("user", userBean);
 		request.getSession().setAttribute("nickname", nickName);
 		response.sendRedirect("/WXPortal/" + curPage + ".jsp");
 	}

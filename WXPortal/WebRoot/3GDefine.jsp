@@ -19,9 +19,7 @@
 		<tr>
 			<td height="20" valign="middle" width="50%"><span class="STYLE1">&nbsp;&nbsp;
 					<%
-						if (request.getSession().getAttribute("isLogin") != null
-								&& request.getSession().getAttribute("isLogin")
-										.equals("true")) {
+						if (request.getSession().getAttribute("user") != null) {
 							//如果已经登录
 					%> 当前登录用户：<%=request.getSession().getAttribute("nickname")%> &nbsp;<a
 					href="server/exit.jsp?curPage=3GDefine" style="float: right;">安全退出&nbsp;&nbsp;</a>
@@ -72,7 +70,7 @@
 		</tr>
 	</table>
 	<%
-		if (request.getSession().getAttribute("isLogin") == null) {
+		if (request.getSession().getAttribute("user") == null) {
 	%>
 	<form action="server/login.jsp" method="post">
 		用户名：<input name="username" /> 密码：<input name="password"
@@ -92,7 +90,7 @@
 	<br />
 	<br />
 	<%
-		if (request.getSession().getAttribute("isLogin") == null) {
+		if (request.getSession().getAttribute("user") == null) {
 	%>
 	<table border="1" cellpadding="10" cellspacing="0" width="100%">
 		<tr>

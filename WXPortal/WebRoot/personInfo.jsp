@@ -32,9 +32,7 @@
 		<tr>
 			<td height="20" valign="middle" width="50%"><span class="STYLE1">&nbsp;&nbsp;
 					<%
-						if (request.getSession().getAttribute("isLogin") != null
-								&& request.getSession().getAttribute("isLogin")
-										.equals("true")) {
+						if (request.getSession().getAttribute("user") != null) {
 							//如果已经登录
 					%> 当前登录用户：<%=request.getSession().getAttribute("nickname")%> &nbsp;<a
 					href="server/exit.jsp?curPage=personInfo" style="float: right;">安全退出&nbsp;&nbsp;</a>
@@ -44,7 +42,8 @@
 					%> 用户尚未登录 <%
 						}
 					%> </span><a href="#" style="float: right;">设为首页&nbsp;&nbsp;</a> <a
-				href="#" style="float: right;">收藏本站&nbsp;&nbsp;</a></td>
+				href="#" style="float: right;">收藏本站&nbsp;&nbsp;</a>
+			</td>
 
 		</tr>
 	</table>
@@ -54,28 +53,22 @@
 		<tr>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="index.jsp">首页</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="manage.jsp">管理</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="introduce.jsp">功能介绍</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="pay.jsp">资费</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="about.jsp">关于</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="help.jsp">帮助</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 
@@ -86,18 +79,19 @@
 					<a href="javascript:history.go(-1);">后退</a>&nbsp;<a
 						href="javascript:history.go(1);">前进</a>&nbsp;<a
 						href="javascript:window.parent.location.reload();">刷新</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<%
-		if (request.getSession().getAttribute("isLogin") == null) {
+		if (request.getSession().getAttribute("user") == null) {
 	%>
 	<form action="server/login.jsp" method="post">
 		用户名：<input name="username" /> 密码：<input name="password"
 			type="password" /> <input type="submit" value="登录" /> <input
 			type="hidden" name="curPage" value="personInfo" /><input
-			type="button" onclick="window.location='register.jsp?curPage=personInfo'" value="注册">
+			type="button"
+			onclick="window.location='register.jsp?curPage=personInfo'"
+			value="注册">
 	</form>
 
 	<%
@@ -107,7 +101,7 @@
 	<h2>公众帐号管理</h2>
 
 	<%
-		if (request.getSession().getAttribute("isLogin") == null) {
+		if (request.getSession().getAttribute("user") == null) {
 	%>
 	<table border="1" cellpadding="10" cellspacing="0" width="100%">
 		<tr>
@@ -125,28 +119,31 @@
 						<tr>
 							<td valign="top"><img src="images/menu_point.jpg" />&nbsp;<a
 								href="personInfo.jsp"
-								style="background-color: blue;color: white;">个人信息</a></td>
+								style="background-color: blue;color: white;">个人信息</a>
+							</td>
 						</tr>
 						<tr>
 							<td><img src="images/menu_point.jpg" />&nbsp;<a
-								href="myWXaccounts.jsp">我的公众帐号</a></td>
+								href="myWXaccounts.jsp">我的公众帐号</a>
+							</td>
 						</tr>
 						<tr>
 							<td><img src="images/menu_point.jpg" />&nbsp;<a
-								href="addWXaccount.jsp" target="wxaccountContent">添加公众帐号</a></td>
+								href="addWXaccount.jsp">添加公众帐号</a>
+							</td>
 						</tr>
-					</table>
-				</td>
+					</table></td>
 				<td>
 					<%
 						if (userInfo == null || userInfo.getName() == null
 									|| userInfo.getName().trim().equals("")) {
 					%>
 					<h3>请如实填写您的个人信息，一旦填写，无法修改！</h3> <%
- 	}else{
+ 	} else {
  %>
- 	<h3>如果您有信息填错，请联系系统管理员</h3>
- <%} %>
+					<h3>如果您有信息填错，请联系系统管理员</h3> <%
+ 	}
+ %>
 					<table width="100%" style="height: 100%;" cellpadding="10px"
 						border="1" cellspacing="0">
 						<%
@@ -155,60 +152,57 @@
 						%>
 						<tr>
 							<td width="15%">*真实姓名</td>
-							<td><input name="name" />
-							</td>
+							<td><input name="name" /></td>
 							<td>请务必填写您的真实姓名，</td>
 						</tr>
 
 						<tr>
 							<td width="15%">*身份证</td>
-							<td><input name="creditCard" />
-							</td>
+							<td><input name="creditCard" /></td>
 							<td>请务必填写您的真实身份证信息</td>
 						</tr>
 						<tr>
 							<td>*手机号</td>
-							<td><input name="telephone" />
-							</td>
+							<td><input name="telephone" /></td>
 							<td>必须正确的手机号,我们系统会自动监测你的vip1以上帐号，如果到期会自动发短信通知!</td>
 						</tr>
 						<tr>
 							<td>*地址</td>
-							<td><input name="addr" />
-							</td>
+							<td><input name="addr" /></td>
 							<td></td>
 						</tr>
 						<tr>
 							<td colspan="3" align="center"><input type="submit"
-								value="提交" /></td>
+								value="提交" />
+							</td>
 						</tr>
 
 						<%
 							} else {
-							
 						%>
-						
+
 						<tr>
 							<td width="15%">真实姓名</td>
-							<td><%=userInfo.getName() %></td>
+							<td><%=userInfo.getName()%></td>
 						</tr>
 
 						<tr>
 							<td width="15%">身份证</td>
-							<td><%=userInfo.getCreditCard() %></td>
+							<td><%=userInfo.getCreditCard()%></td>
 						</tr>
 						<tr>
 							<td>手机号</td>
-							<td><%=userInfo.getTelphone() %></td>
+							<td><%=userInfo.getTelphone()%></td>
 						</tr>
 						<tr>
 							<td>地址</td>
-							<td><%=userInfo.getAddr() %></td>
+							<td><%=userInfo.getAddr()%></td>
 						</tr>
 						<%
 							}
 						%>
-					</table></td>
+					</table>
+				</td>
 			</tr>
 		</table>
 	</form>

@@ -19,19 +19,17 @@
 		<tr>
 			<td height="20" valign="middle" width="50%"><span class="STYLE1">&nbsp;&nbsp;
 					<%
-						if (request.getSession().getAttribute("isLogin") != null
-								&& request.getSession().getAttribute("isLogin")
-										.equals("true")) {
+						if (request.getSession().getAttribute("user") != null) {
 							//如果已经登录
-					%> 当前登录用户：<%=request.getSession().getAttribute("nickname")%>
-					&nbsp;<a href="server/exit.jsp?curPage=pay" style="float: right;">安全退出&nbsp;&nbsp;</a> <%
+					%> 当前登录用户：<%=request.getSession().getAttribute("nickname")%> &nbsp;<a
+					href="server/exit.jsp?curPage=pay" style="float: right;">安全退出&nbsp;&nbsp;</a>
+					<%
 						} else {
 							//如果未登录
 					%> 用户尚未登录 <%
 						}
 					%> </span><a href="#" style="float: right;">设为首页&nbsp;&nbsp;</a> <a
-				href="#" style="float: right;">收藏本站&nbsp;&nbsp;</a>
-			</td>
+				href="#" style="float: right;">收藏本站&nbsp;&nbsp;</a></td>
 
 		</tr>
 	</table>
@@ -41,22 +39,28 @@
 		<tr>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="index.jsp">首页</a>
-				</div></td>
+				</div>
+			</td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="manage.jsp">管理</a>
-				</div></td>
+				</div>
+			</td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="introduce.jsp">功能介绍</a>
-				</div></td>
+				</div>
+			</td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="pay.jsp">资费</a>
-				</div></td>
+				</div>
+			</td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="about.jsp">关于</a>
-				</div></td>
+				</div>
+			</td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="help.jsp">帮助</a>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 
@@ -67,17 +71,18 @@
 					<a href="javascript:history.go(-1);">后退</a>&nbsp;<a
 						href="javascript:history.go(1);">前进</a>&nbsp;<a
 						href="javascript:window.parent.location.reload();">刷新</a>
-				</div></td>
+				</div>
+			</td>
 		</tr>
 	</table>
 	<%
-		if (request.getSession().getAttribute("isLogin") == null) {
+		if (request.getSession().getAttribute("user") == null) {
 	%>
 	<form action="server/login.jsp" method="post">
 		用户名：<input name="username" /> 密码：<input name="password"
 			type="password" /> <input type="submit" value="登录" /> <input
-			type="hidden" name="curPage" value="pay" /><input
-			type="button" onclick="window.location='register.jsp?curPage=pay'" value="注册">
+			type="hidden" name="curPage" value="pay" /><input type="button"
+			onclick="window.location='register.jsp?curPage=pay'" value="注册">
 	</form>
 
 	<%
