@@ -43,7 +43,25 @@
 
 		<!-- Drop and re-create the database schema on startup <property name="hbm2ddl.auto">create</property> -->
 
-		<mapping resource="org/wxportal/dao/User.hbm.xml" />
+		 <mapping resource="org/wxportal/dao/UserTest.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/CustomResp.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/Functions.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/RespFuction.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/RespImage.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/RespLink.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/RespMusic.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/RespNews.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/RespText.hbm.xml"/>
+        
+        <mapping resource="org/wxportal/dao/WXAccountBean.hbm.xml"/>
 
 	</session-factory>
 

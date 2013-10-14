@@ -39,8 +39,8 @@ public class WXAccountDBService {
 	 * 
 	 * @param wxaccount
 	 */
-	public void addWXAccount(WXAccountBean wxaccount) {
-		dao.save(wxaccount);
+	public int addWXAccount(WXAccountBean wxaccount) {
+		return dao.save(wxaccount);
 	}
 
 	/**

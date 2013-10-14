@@ -136,16 +136,15 @@ public class UserDBService {
 	 * @param passWord
 	 * @return
 	 */
-	public boolean login(String nickName, String passWord) {
-		boolean bFlag = false;
+	public UserBean login(String nickName, String passWord) {
 		// String psw = Md5Method.MD5(passWord);
 		ArrayList<UserBean> list = queryUsers("UserBean", new String[] {
 				"nickName", "passWord" }, new String[] { nickName, passWord },
 				0, 0);
-		if (list.size() > 0) {
-			bFlag = true;
+		if(list.size()>0){
+			return list.get(0);
 		}
-		return bFlag;
+		return null;
 	}
 
 	/**
