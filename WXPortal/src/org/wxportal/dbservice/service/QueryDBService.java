@@ -1,9 +1,7 @@
 package org.wxportal.dbservice.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.wxportal.dao.RespFunctionDAO;
 import org.wxportal.dao.RespImageDAO;
@@ -11,7 +9,6 @@ import org.wxportal.dao.RespLinkDAO;
 import org.wxportal.dao.RespMusicDAO;
 import org.wxportal.dao.RespNewsDAO;
 import org.wxportal.dao.RespTextDAO;
-import org.wxportal.dao.bean.RespNewsBean;
 
 /**
  * 依据请求参数查询用户定义的回复信息
@@ -55,7 +52,7 @@ public class QueryDBService {
 	private List query(int wxAccountId,String type,String reqKey){
 		String sFlag = "false";
 		String sType = "";
-		List list = null;
+		List list = new ArrayList<Object>();
 		if("text".equals(type)){
 			RespTextDAO dao = new RespTextDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
@@ -114,9 +111,9 @@ public class QueryDBService {
 				sFlag = "true";
 				sType = "Function";
 			}
-			return this.toList(list, type, sFlag);
+			return this.toList(list, sType, sFlag);
 		}
-		return this.toList(list, type, sFlag);
+ 		return this.toList(list, sType, sFlag);
 	}
 	
    
@@ -128,7 +125,7 @@ public class QueryDBService {
 	 * @return
 	 */
 	private List toList(List list,String sType,String sFlag){
-		List result = null;
+		List result =  new ArrayList<Object>();
 		result.add(sFlag);
 		result.add(sType);
 		if(list.size()>0){

@@ -1,6 +1,6 @@
 package org.wxportal.dao;
 
-import org.wxportal.dbservice.service.StringType;
+import org.wxportal.dbservice.service.QueryDBService;
 
 
 public class UserTestDAO {
@@ -123,7 +123,9 @@ public class UserTestDAO {
 		bean.setReqKey("111");
 		service.delete(1, "image");*/
 		
-		System.out.print(StringType.getType("1", "", 1));
+		//System.out.print(StringType.getType("1", "", 1));
+		QueryDBService d = new QueryDBService();
+		d.queryInfo("1", "1", 1);
 	}
 
 }
