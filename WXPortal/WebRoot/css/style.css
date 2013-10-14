@@ -1,0 +1,28 @@
+html {
+	overflow: auto; /*让浏览器在显示区域不够时，自动出现滚动条*/
+}
+
+body {
+	margin: 0 auto;
+	padding: 0;
+	overflow: hidden;
+	width: 800px;
+	height: 100%;
+	font-size: 12px;
+	background: #eeeeee;
+}
+
+a {
+	color: black;
+	font-size: 12px;
+	text-decoration: none;
+}
+
+a:HOVER {
+	text-decoration: underline;
+}
+
+a:FOCUS {
+	background-color: blue;
+	color: white;
+}
