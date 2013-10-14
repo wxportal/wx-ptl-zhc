@@ -4,8 +4,8 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+	+ request.getServerName() + ":" + request.getServerPort()
+	+ path + "/";
 
 	request.setCharacterEncoding("utf-8");
 	String name = (String) request.getParameter("name");
@@ -20,7 +20,7 @@
 	WXAccountBean wxAccountBean = new WXAccountBean();
 
 	UserBean user = (UserBean) request.getSession()
-			.getAttribute("user");
+	.getAttribute("user");
 
 	wxAccountBean.setName(name);
 	wxAccountBean.setOrgId(orgId);
@@ -31,10 +31,11 @@
 	
 	System.out.println(wxAccountDBService.addWXAccount(wxAccountBean));
 
-// 	if (wxAccountDBService.addWXAccount(wxAccountBean) > 0) {
-// 		request.getSession().setAttribute("addWXaccountStatus", "添加成功");
-// 		response.sendRedirect("/WXPortal/addWXaccount.jsp");
-// 	}else{
-// 		request.getSession().setAttribute("addWXaccountStatus", "添加失败成功");
-// 	}
+		if (wxAccountDBService.addWXAccount(wxAccountBean) > 0) {
+		request.getSession().setAttribute("addWXaccountStatus", "添加成功");
+		response.sendRedirect("/WXPortal/addWXaccount.jsp");
+	} else {
+		request.getSession().setAttribute("addWXaccountStatus",
+				"添加失败成功");
+	}
 %>
