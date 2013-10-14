@@ -128,7 +128,7 @@
 		}
 	%>
 	<form action="server/register.jsp?curPage=<%=curPage %>" method="post">
-		<table border="1" cellpadding="10" cellspacing="0">
+		<table border="1" cellpadding="10" cellspacing="0" width="100%">
 			<tr>
 				<td>用户名：</td>
 				<td><input type="text" id="nickname" name="nickname" /></td>

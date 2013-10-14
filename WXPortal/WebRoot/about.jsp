@@ -84,7 +84,7 @@
 		}
 	%>
 	<h2>关于</h2>
-	<table width="620px" style="height: 100%;" cellpadding="10px"
+	<table width="100%" style="height: 100%;" cellpadding="10px"
 		bgcolor="#eeeeee" border="1" cellspacing="0">
 		<tr>
 			<td>公司有强大的技术团队，有什么不会的，直接来问</td>

@@ -89,7 +89,7 @@
 	<%
 		if (request.getSession().getAttribute("isLogin") == null) {
 	%>
-	<table border="1" cellpadding="10" cellspacing="0">
+	<table border="1" cellpadding="10" cellspacing="0" width="100%">
 		<tr>
 			<td>您还尚未登录，请先登录！</td>
 		</tr>

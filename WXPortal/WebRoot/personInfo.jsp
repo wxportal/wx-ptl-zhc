@@ -109,7 +109,7 @@
 	<%
 		if (request.getSession().getAttribute("isLogin") == null) {
 	%>
-	<table border="1" cellpadding="10" cellspacing="0">
+	<table border="1" cellpadding="10" cellspacing="0" width="100%">
 		<tr>
 			<td>您还尚未登录，请先登录！</td>
 		</tr>
@@ -119,7 +119,7 @@
 	%>
 	<form action="server/fillUserInfo.jsp">
 
-		<table border="1" cellpadding="10" cellspacing="0">
+		<table border="1" cellpadding="10" cellspacing="0" width="100%">
 			<tr>
 				<td valign="top"><table width="100%" cellpadding="10">
 						<tr>
@@ -147,7 +147,7 @@
  %>
  	<h3>如果您有信息填错，请联系系统管理员</h3>
  <%} %>
-					<table width="620px" style="height: 100%;" cellpadding="10px"
+					<table width="100%" style="height: 100%;" cellpadding="10px"
 						border="1" cellspacing="0">
 						<%
 							if (userInfo == null || userInfo.getName() == null

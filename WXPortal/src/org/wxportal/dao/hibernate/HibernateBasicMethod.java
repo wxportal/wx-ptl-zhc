@@ -29,7 +29,7 @@ public class HibernateBasicMethod {
 		session.save(o);
 		session.getTransaction().commit();
 		obj = o;
-		// session.close();
+		session.close();
 		return obj;
 	}
 
@@ -48,7 +48,7 @@ public class HibernateBasicMethod {
 			bFlag = true;
 		}
 		session.getTransaction().commit();
-		// session.close();
+		session.close();
 		return bFlag;
 	}
 
@@ -75,7 +75,7 @@ public class HibernateBasicMethod {
 		Query query = session.createQuery(hql);
 		int i = query.executeUpdate();
 		session.getTransaction().commit();
-		// session.close();
+		session.close();
 		if (i > 0) {
 			bFlag = true;
 		}
@@ -94,7 +94,7 @@ public class HibernateBasicMethod {
 		// }
 		session.update(o);
 		session.getTransaction().commit();
-		// session.close();
+		session.close();
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class HibernateBasicMethod {
 		Query query = session.createQuery(hql);
 		query.executeUpdate();
 		session.getTransaction().commit();
-		// session.close();
+		session.close();
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class HibernateBasicMethod {
 		Session session = HibernateSessionFactory.getSession();
 		session.beginTransaction();
 		Object object = session.get(clazz, id);
-		// session.close();
+		session.close();
 		return object;
 	}
 
@@ -167,7 +167,7 @@ public class HibernateBasicMethod {
 		}
 		list = query.list();
 		session.getTransaction().commit();
-		// session.close();
+		session.close();
 		return list;
 	}
 
@@ -200,7 +200,7 @@ public class HibernateBasicMethod {
 		}
 		list = query.list();
 		session.getTransaction().commit();
-		// session.close();
+		session.close();
 		return list;
 	}
 
@@ -228,7 +228,7 @@ public class HibernateBasicMethod {
 		}
 		list = query.list();
 		session.getTransaction().commit();
-		// session.close();
+		session.close();
 		return list;
 	}
 

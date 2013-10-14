@@ -84,7 +84,7 @@
 		}
 	%>
 	<h2>功能介绍</h2>
-	<table width="620px" style="height: 100%;" cellpadding="10px"
+	<table width="100%" style="height: 100%;" cellpadding="10px"
 		bgcolor="#eeeeee" border="1" cellspacing="0">
 		<tr>
 			<td>提供灵活的微信公众帐号回复设置，让您使用的舒适，随心！</td>

@@ -89,7 +89,7 @@
 
 	<h2>首页</h2>
 
-	<table width="620px" style="height: 100%;" cellpadding="10px"
+	<table width="100%" style="height: 100%;" cellpadding="10px"
 		border="1" cellspacing="0">
 		<tr>
 			<td>我们一直致力于为您提供最贴心的服务。</td>

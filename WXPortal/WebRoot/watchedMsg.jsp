@@ -24,13 +24,15 @@
 										.equals("true")) {
 							//如果已经登录
 					%> 当前登录用户：<%=request.getSession().getAttribute("nickname")%> &nbsp;<a
-					href="server/exit.jsp?curPage=watchedMsg" style="float: right;">安全退出&nbsp;&nbsp;</a> <%
- 	} else {
- 		//如果未登录
- %> 用户尚未登录 <%
- 	}
- %> </span><a href="#" style="float: right;">设为首页&nbsp;&nbsp;</a> <a href="#"
-				style="float: right;">收藏本站&nbsp;&nbsp;</a></td>
+					href="server/exit.jsp?curPage=watchedMsg" style="float: right;">安全退出&nbsp;&nbsp;</a>
+					<%
+						} else {
+							//如果未登录
+					%> 用户尚未登录 <%
+						}
+					%> </span><a href="#" style="float: right;">设为首页&nbsp;&nbsp;</a> <a href="#"
+				style="float: right;">收藏本站&nbsp;&nbsp;</a>
+			</td>
 
 		</tr>
 	</table>
@@ -40,28 +42,22 @@
 		<tr>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="index.jsp">首页</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="manage.jsp">管理</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="introduce.jsp">功能介绍</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="pay.jsp">资费</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="about.jsp">关于</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="help.jsp">帮助</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 
@@ -72,8 +68,7 @@
 					<a href="javascript:history.go(-1);">后退</a>&nbsp;<a
 						href="javascript:history.go(1);">前进</a>&nbsp;<a
 						href="javascript:window.parent.location.reload();">刷新</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<%
@@ -83,7 +78,9 @@
 		用户名：<input name="username" /> 密码：<input name="password"
 			type="password" /> <input type="submit" value="登录" /><input
 			type="hidden" name="curPage" value="watchedMsg" /> <input
-			type="button" onclick="window.location='register.jsp?curPage=watchedMsg'" value="注册">
+			type="button"
+			onclick="window.location='register.jsp?curPage=watchedMsg'"
+			value="注册">
 	</form>
 
 	<%
@@ -91,86 +88,95 @@
 	%>
 
 	<h2>功能管理</h2>
-	<table cellpadding="10" cellspacing="0" border="1">
+	<input type="button" onclick="window.location='manage.jsp'"
+		value="返回公众号管理">
+	<br />
+	<br />
+	<%
+		if (request.getSession().getAttribute("isLogin") == null) {
+	%>
+	<table border="1" cellpadding="10" cellspacing="0" width="100%">
 		<tr>
-			<td>aidanfd <br />微信号:lfdskafkd</td>
-			<td>vip等级：1级</td>
-			<td>购买时间：2012年9月10日</td>
-			<td>到期时间：2013年9月10日</td>
+			<td>您还尚未登录，请先登录！</td>
+		</tr>
+	</table>
+	<%
+		} else {
+	%>
+	<table cellpadding="10" cellspacing="0" border="1" width="100%">
+		<tr>
+			<td width="25%">aidanfd <br />微信号:lfdskafkd</td>
+			<td width="25%">vip等级：1级</td>
+			<td width="25%">购买时间：2012年9月10日</td>
+			<td width="25%">到期时间：2013年9月10日</td>
 		</tr>
 		<tr>
 			<td width="20%" valign="top"><table width="100%"
 					cellpadding="10">
 					<!-- 基础设置 -->
 					<tr>
-						<td>&nbsp;<font color="blue">基础设置</font>
-						</td>
+						<td>&nbsp;<font color="blue">基础设置</font></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="functionManage.jsp">功能选择</a>
-						</td>
+							href="functionManage.jsp">功能选择</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
 							href="watchedMsg.jsp"
-							style="background-color: blue;color: white;">关注时回复</a>
-						</td>
+							style="background-color: blue;color: white;">关注时回复</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="textResp.jsp">自定义文本回复</a>
-						</td>
+							href="textResp.jsp">自定义文本回复</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="musicResp.jsp">自定义音乐回复</a>
-						</td>
+							href="musicResp.jsp">自定义音乐回复</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="newsResp.jsp">自定义图文回复</a>
-						</td>
+							href="newsResp.jsp">自定义图文回复</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="unknownResp.jsp">不知道时答复</a>
-						</td>
+							href="unknownResp.jsp">不知道时答复</a></td>
 					</tr>
 
 					<!-- 3G站设置 -->
 					<tr>
-						<td>&nbsp;<font color="blue">3G站设置</font>
-						</td>
+						<td>&nbsp;<font color="blue">3G站设置</font></td>
 					</tr>
 
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="3GDefine.jsp">3G站设置</a>
-						</td>
+							href="3GDefine.jsp">3G站设置</a></td>
 					</tr>
-				</table>
-			</td>
+				</table></td>
 			<td colspan="3" valign="top"><h3>关注时回复</h3>
-				<table width="620px" style="height: 100%;" cellpadding="10px"
+				<table width="100%" style="height: 100%;" cellpadding="10px"
 					border="1" cellspacing="0">
 					<tr>
-						<td><input /></td>
+						<td><input />
+						</td>
 					</tr>
 					<tr>
-						<td colspan="1"><button>保存</button></td>
+						<td colspan="1"><button>保存</button>
+						</td>
 					</tr>
 				</table>
 
 				<h3>当前配置的回复为：</h3>
-				<table width="620px" style="height: 100%;" cellpadding="10px"
+				<table width="100%" style="height: 100%;" cellpadding="10px"
 					border="1" cellspacing="0">
 					<tr>
 						<td>您好，欢迎关注Coosuper,我们将给您带来最舒适的服务</td>
 					</tr>
-				</table>
-			</td>
+				</table></td>
 		</tr>
 	</table>
+	<%
+		}
+	%>
 </body>
 </html>

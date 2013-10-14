@@ -84,7 +84,7 @@
 		}
 	%>
 	<h2>资费</h2>
-	<table width="620px" style="height: 100%;" cellpadding="10px"
+	<table width="100%" style="height: 100%;" cellpadding="10px"
 		bgcolor="#eeeeee" border="1" cellspacing="0">
 		<tr>
 			<td>一点也不贵，一年只要两万八，包维护，包技术支持！</td>
