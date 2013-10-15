@@ -87,7 +87,7 @@ public class HibernateBasicMethod {
 	 * 
 	 * @param o
 	 */
-	public void update(Object o) {
+	public void update(Object o)throws Exception {
 		Session session = HibernateSessionFactory.getSession();
 		// if (session.getTransaction() == null) {
 		session.beginTransaction();
@@ -107,7 +107,7 @@ public class HibernateBasicMethod {
 	 *            []
 	 */
 	public void updateValue(Object object, String[] columns, String[] values,
-			String whereCause) {
+			String whereCause) throws Exception{
 		Session session = HibernateSessionFactory.getSession();
 		String hql = "";
 		hql = "update " + object + " set ";
