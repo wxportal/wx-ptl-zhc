@@ -75,8 +75,8 @@ public class ObjectDBService {
 	 * 
 	 * @param wxaccount
 	 */
-	public void update(Object object, String infoType) {
-		dao.getDAO(infoType).update(object);
+	public boolean update(Object object, String infoType) {
+		return dao.getDAO(infoType).update(object);
 	}
 
 	/**
@@ -91,9 +91,9 @@ public class ObjectDBService {
 	 * @param whereCause
 	 *            ：where条件
 	 */
-	public void updateByValue(Object object, String[] columns, String[] values,
+	public boolean updateByValue(Object object, String[] columns, String[] values,
 			String whereCause, String infoType) {
-		dao.getDAO(infoType).updateByValue(object, columns, values, whereCause);
+		return dao.getDAO(infoType).updateByValue(object, columns, values, whereCause);
 	}
 
 	/**

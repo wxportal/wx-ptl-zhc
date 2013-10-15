@@ -75,8 +75,8 @@ public class UserDBService {
 	 * 
 	 * @param user
 	 */
-	public void updateUser(UserBean user) {
-		userDAO.update(user);
+	public boolean updateUser(UserBean user) {
+		return userDAO.updateUser(user);
 	}
 
 	/**

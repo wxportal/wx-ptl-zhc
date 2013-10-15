@@ -91,9 +91,11 @@ public class WXAccountDBService {
 	 * 更新一个微信账号信息
 	 * 
 	 * @param wxaccount
+	 * return 
+	 *        :true:更新成功  false：更新失败
 	 */
-	public void updateWXAccount(WXAccountBean wxaccount) {
-		dao.update(wxaccount);
+	public boolean updateWXAccount(WXAccountBean wxaccount) {
+		return dao.update(wxaccount);
 	}
 
 	/**
@@ -107,10 +109,12 @@ public class WXAccountDBService {
 	 *            ：属性对应的值
 	 * @param whereCause
 	 *            ：where条件
+	 *  return 
+	 *            :true:更新成功  false：更新失败
 	 */
-	public void updateWXAccountByValue(String WXAccountBean, String[] columns,
+	public boolean updateWXAccountByValue(String WXAccountBean, String[] columns,
 			String[] values, String whereCause) {
-		dao.updateByValue(WXAccountBean, columns, values, whereCause);
+		return dao.updateByValue(WXAccountBean, columns, values, whereCause);
 	}
 
 	/**

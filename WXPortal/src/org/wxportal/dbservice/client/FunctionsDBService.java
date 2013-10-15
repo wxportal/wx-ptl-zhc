@@ -75,8 +75,8 @@ public class FunctionsDBService {
 	 * 
 	 * @param user
 	 */
-	public void updateFuns(FunctionsBean bean) {
-		dao.update(bean);
+	public boolean updateFuns(FunctionsBean bean) {
+		return dao.update(bean);
 	}
 
 	/**

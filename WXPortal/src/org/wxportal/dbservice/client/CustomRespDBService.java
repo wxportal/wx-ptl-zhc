@@ -92,8 +92,8 @@ public class CustomRespDBService {
 	 * 
 	 * @param wxaccount
 	 */
-	public void updateCustomResp(CustomRespBean bean) {
-		dao.update(bean);
+	public boolean updateCustomResp(CustomRespBean bean) {
+		return dao.update(bean);
 	}
 
 	/**
@@ -108,9 +108,9 @@ public class CustomRespDBService {
 	 * @param whereCause
 	 *            ：where条件
 	 */
-	public void updateCustomRespByValue(String CustomRespBean,
+	public boolean updateCustomRespByValue(String CustomRespBean,
 			String[] columns, String[] values, String whereCause) {
-		dao.updateByValue(CustomRespBean, columns, values, whereCause);
+		return dao.updateByValue(CustomRespBean, columns, values, whereCause);
 	}
 
 	/**
