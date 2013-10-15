@@ -50,8 +50,14 @@ public class WXAccountDAO extends HibernateBasicMethod {
 	 * 更新一个对象
 	 * @param wxaccount
 	 */
-	public void update(WXAccountBean wxaccount){
-		super.update(wxaccount);
+	public boolean update(WXAccountBean wxaccount){
+		try{
+			super.update(wxaccount);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	/**
@@ -61,8 +67,15 @@ public class WXAccountDAO extends HibernateBasicMethod {
 	 * @param values
 	 * @param whereCause
 	 */
-	public void updateByValue(Object WXAccountBean,String[] columns,String[] values,String whereCause){
-		super.updateValue(WXAccountBean, columns, values, whereCause);
+	public boolean updateByValue(Object WXAccountBean,String[] columns,String[] values,String whereCause){
+		try{
+			super.updateValue(WXAccountBean, columns, values, whereCause);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 	
 	/**

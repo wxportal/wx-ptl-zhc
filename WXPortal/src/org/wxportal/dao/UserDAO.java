@@ -58,8 +58,14 @@ public class UserDAO extends HibernateBasicMethod {
 	 * 
 	 * @param user
 	 */
-	public void updateUser(UserBean user) {
-		super.update(user);
+	public boolean updateUser(UserBean user) {
+		try {
+			super.update(user);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/**
@@ -74,9 +80,15 @@ public class UserDAO extends HibernateBasicMethod {
 	 * @param whereCause
 	 *            ：where 条件
 	 */
-	public void updateByValue(String UserBean, String[] columns,
+	public boolean updateByValue(String UserBean, String[] columns,
 			String[] values, String whereCause) {
-		super.updateValue(UserBean, columns, values, whereCause);
+		try {
+			super.updateValue(UserBean, columns, values, whereCause);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	/**

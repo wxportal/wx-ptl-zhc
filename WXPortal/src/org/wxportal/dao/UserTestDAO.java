@@ -1,6 +1,7 @@
 package org.wxportal.dao;
 
-import org.wxportal.dbservice.service.QueryDBService;
+import org.wxportal.dao.bean.WXAccountBean;
+import org.wxportal.dbservice.client.WXAccountDBService;
 
 
 public class UserTestDAO {
@@ -124,8 +125,14 @@ public class UserTestDAO {
 		service.delete(1, "image");*/
 		
 		//System.out.print(StringType.getType("1", "", 1));
-		QueryDBService d = new QueryDBService();
-		d.queryInfo("1", "1", 1);
+		/*QueryDBService d = new QueryDBService();
+		d.queryInfo("1", "1", 1);*/
+		
+		WXAccountBean bean = new WXAccountBean();
+		bean.setId(1);
+		bean.setArea("2222");
+		WXAccountDBService s = new WXAccountDBService();
+		s.updateWXAccount(bean);
 	}
 
 }

@@ -36,7 +36,7 @@ public abstract class DAOFactory {
 	 * 更新一个对象
 	 * @param object
 	 */
-	public abstract void update(Object object);
+	public abstract boolean update(Object object);
 	
 	/**
 	 * 更新满足条件的记录
@@ -45,7 +45,7 @@ public abstract class DAOFactory {
 	 * @param values
 	 * @param whereCause
 	 */
-	public abstract void updateByValue(Object object,String[] columns,String[] values,String whereCause);
+	public abstract boolean updateByValue(Object object,String[] columns,String[] values,String whereCause);
 	
 	/**
 	 * 查询一个对象

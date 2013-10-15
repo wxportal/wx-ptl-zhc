@@ -7,8 +7,9 @@ import org.wxportal.dao.hibernate.HibernateBasicMethod;
 
 /**
  * 文本信息处理
+ * 
  * @author HanWei
- *
+ * 
  */
 public class RespNewsDAO extends DAOFactory {
 
@@ -16,13 +17,14 @@ public class RespNewsDAO extends DAOFactory {
 
 	/**
 	 * 新增
+	 * 
 	 * @param Object
 	 */
 	@Override
-	public int add(Object object){
-		RespNewsBean bean = (RespNewsBean)object;
+	public int add(Object object) {
+		RespNewsBean bean = (RespNewsBean) object;
 		try {
-			bean = (RespNewsBean)baseMethod.save(bean);
+			bean = (RespNewsBean) baseMethod.save(bean);
 			return bean.getId();
 		} catch (Exception e) {
 			System.out.println("保存时发生错误！");
@@ -30,88 +32,109 @@ public class RespNewsDAO extends DAOFactory {
 			return -1;
 		}
 	}
-	
+
 	/**
 	 * 删除
+	 * 
 	 * @param id
 	 */
 	@Override
-	public boolean delete(int id){
-		return baseMethod.delete(RespNewsBean.class,id);
+	public boolean delete(int id) {
+		return baseMethod.delete(RespNewsBean.class, id);
 	}
-	
+
 	/**
 	 * 删除满足条件的记录
+	 * 
 	 * @param RespNewsBean
 	 * @param columns
 	 * @param values
 	 */
 	@Override
-	public boolean delByValue(Object RespNewsBean,String[] columns,String[] values){
+	public boolean delByValue(Object RespNewsBean, String[] columns,
+			String[] values) {
 		return baseMethod.delByValue(RespNewsBean, columns, values);
 	}
-	
+
 	/**
 	 * 更新一个对象
+	 * 
 	 * @param object
 	 */
 	@Override
-	public void update(Object object){
-		RespNewsBean bean = (RespNewsBean)object;
-		baseMethod.update(bean);
+	public boolean update(Object object) {
+		try {
+			RespNewsBean bean = (RespNewsBean) object;
+			baseMethod.update(bean);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-	
+
 	/**
 	 * 更新满足条件的记录
+	 * 
 	 * @param RespNewsBean
 	 * @param columns
 	 * @param values
 	 * @param whereCause
 	 */
 	@Override
-	public void updateByValue(Object RespNewsBean,String[] columns,String[] values,String whereCause){
-		baseMethod.updateValue(RespNewsBean, columns, values, whereCause);
+	public boolean updateByValue(Object RespNewsBean, String[] columns,
+			String[] values, String whereCause) {
+		try {
+			baseMethod.updateValue(RespNewsBean, columns, values, whereCause);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
-	
+
 	/**
 	 * 查询一个对象
+	 * 
 	 * @param id
 	 */
 	@Override
-	public RespNewsBean query(int id){
-		return (RespNewsBean)baseMethod.queryOne(RespNewsBean.class, id);
+	public RespNewsBean query(int id) {
+		return (RespNewsBean) baseMethod.queryOne(RespNewsBean.class, id);
 	}
-	
+
 	/**
 	 * 查询满足条件的集合
+	 * 
 	 * @param RespTextBean
 	 * @param columns
 	 * @param values
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List querysByValue(Object object,String[] columns,String[] values,int page,int pageSize){
-		RespNewsBean bean = (RespNewsBean)object;
-		return  baseMethod.query(bean, columns, values,page,pageSize);
+	public List querysByValue(Object object, String[] columns, String[] values,
+			int page, int pageSize) {
+		RespNewsBean bean = (RespNewsBean) object;
+		return baseMethod.query(bean, columns, values, page, pageSize);
 	}
 
 	@Override
 	public List querys(int wxAccountId, int page, int pageSize) {
-		String whereCause = " where wxAccountId = "+wxAccountId;
-		return baseMethod.queryByCondition("RespNewsBean", whereCause, page, pageSize);
+		String whereCause = " where wxAccountId = " + wxAccountId;
+		return baseMethod.queryByCondition("RespNewsBean", whereCause, page,
+				pageSize);
 	}
-	
 
 	/**
-	 *依据拼接好的条件查询
+	 * 依据拼接好的条件查询
 	 */
 	@Override
 	public List queryByCondition(Object object, String whereCause, int page,
 			int pageSize) {
-		return baseMethod.queryByCondition("RespNewsBean", whereCause, page, pageSize);
+		return baseMethod.queryByCondition("RespNewsBean", whereCause, page,
+				pageSize);
 	}
-	
-	
+
 	public HibernateBasicMethod getBaseMethod() {
 		return baseMethod;
 	}
