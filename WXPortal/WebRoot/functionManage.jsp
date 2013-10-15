@@ -70,7 +70,7 @@
 		</tr>
 	</table>
 	<%
-		if (request.getSession().getAttribute("isLogin") == null) {
+		if (request.getSession().getAttribute("user") == null) {
 	%>
 	<form action="server/login.jsp" method="post">
 		用户名：<input name="username" /> 密码：<input name="password"

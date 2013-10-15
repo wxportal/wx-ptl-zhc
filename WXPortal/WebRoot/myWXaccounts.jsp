@@ -137,34 +137,50 @@
 				%>
 				<h3>您还没有创建公众帐号</h3> <input type="button"
 				onclick="window.location='addWXaccount.jsp'" value="添加公众帐号"><br />
-			<br /> <%
+				<br /> <%
  	} else {
  %>
 				<h3>已有公众帐号列表</h3> <input type="button"
 				onclick="window.location='addWXaccount.jsp'" value="添加公众帐号"><br />
-			<br />
+				<br /> <%
+ 	if (request.getSession().getAttribute("delWXaccountStatus") != null) {
+ %> <font color="red"><%=request.getSession().getAttribute(
+								"delWXaccountStatus")%></font><br /><br /> <%
+ 	request.getSession().setAttribute("delWXaccountStatus",
+ 						null);
+ 			}
+ %>
 				<table width="100%" border="1" cellpadding="10" cellspacing="0">
 					<tr>
 						<td>公众号名称</td>
-						<td>已定义/上限</td>
-						<td>请求数</td>
-						<td>本月状态</td>
-						<td>操作</td>
+						<td>原始id</td>
+						<td>微信号</td>
+						<td>token</td>
+						<td>地区</td>
+						<td>管理</td>
 					</tr>
+					<%
+						for (int i = 0; i < size; i++) {
+					%>
 					<tr>
-						<td>aidanfd</td>
+						<td><%=wxAccountBeans.get(i).getName()%></td>
 						</td>
-						<td>文本：0/3000<br /> 图文：0/3000 <br />语音：0/3000</td>
-						<td>总请求数:0<br /> 本月请求数:0</td>
-						<td>赠送请求总数：150000<br /> 免费请求剩余数：140000</td>
+						<td><%=wxAccountBeans.get(i).getOrgId()%></td>
+						<td><%=wxAccountBeans.get(i).getWxNumber()%></td>
+						<td><%=wxAccountBeans.get(i).getToken()%></td>
+						<td><%=wxAccountBeans.get(i).getArea()%></td>
 						<td><input type="button"
-							onclick="window.location='editWXaccount.jsp?wxaccountid=1'"
+							onclick="window.location='editWXaccount.jsp?wxaccountid=<%=wxAccountBeans.get(i).getId()%>'"
 							value="编辑"><input type="button"
-							onclick="window.location='delWXaccount.jsp?wxaccountid=1'"
-							value="删除"> <input type="button"
-							onclick="window.location='functionManage.jsp'" value="功能管理">
+								onclick="window.location='server/delWXaccount.jsp?wxaccountid=<%=wxAccountBeans.get(i).getId()%>'"
+								value="删除"> <input type="button"
+									onclick="window.location='functionManage.jsp?wxaccountid=<%=wxAccountBeans.get(i).getId()%>'"
+									value="功能管理">
 						</td>
 					</tr>
+					<%
+						}
+					%>
 				</table> <%
  	}
  %>

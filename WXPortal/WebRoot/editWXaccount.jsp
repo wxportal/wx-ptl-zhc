@@ -6,6 +6,13 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+
+	String wxaccountid = (String) request.getParameter("wxaccountid");
+	WXAccountBean wxaccountBean = null;
+	if (wxaccountid != null && !wxaccountid.trim().equals("")) {
+		wxaccountBean = new WXAccountDBService()
+				.queryWXAccount(new Integer(wxaccountid).intValue());
+	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
@@ -103,51 +110,41 @@
 
 	<table border="1" cellpadding="10" cellspacing="0" width="100%">
 		<tr>
-			<td valign="top" width="20%"><table width="100%"
-					cellpadding="10">
-					<tr>
-						<td valign="top"><img src="images/menu_point.jpg" />&nbsp;<a
-							href="personInfo.jsp">个人信息</a>
-						</td>
-					</tr>
-					<tr>
-						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="myWXaccounts.jsp">我的公众帐号</a></td>
-					</tr>
-					<tr>
-						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="addWXaccount.jsp"
-							style="background-color: blue;color: white;">添加公众帐号</a>
-						</td>
-					</tr>
-				</table></td>
 			<td>
-				<h3>添加公众帐号</h3> <%
+				<h3>编辑公众帐号</h3> <%
  	if (request.getSession().getAttribute("addWXaccountStatus") != null) {
  %> <font color="red"><%=request.getSession().getAttribute(
-							"addWXaccountStatus")%></font><br /><br />
-				<%
-					request.getSession().setAttribute("addWXaccountStatus",
-									null);
-						}
-				%>
-				<form action="server/addWXaccount.jsp" method="post">
+							"addWXaccountStatus")%></font><br /> <br /> <%
+ 	request.getSession().setAttribute("addWXaccountStatus",
+ 					null);
+ 		}
+ %>
+				<form action="server/updateWXaccount.jsp" method="post">
 					<table width="100%" style="height: 100%;" cellpadding="10px"
 						border="1" cellspacing="0">
 						<tr>
 							<td width="20%">*公众帐号名称</td>
-							
-							<td><input name="name" /></td>
+
+							<td><input name="name"
+								value="<%if (wxaccountBean != null)
+					out.print(wxaccountBean.getName());%>" />
+							</td>
 							<td></td>
 						</tr>
 						<tr>
 							<td>*公众帐号原始id</td>
-							<td><input name="orgId" /></td>
+							<td><input name="orgId"
+								value="<%if (wxaccountBean != null)
+					out.print(wxaccountBean.getOrgId());%>" />
+							</td>
 							<td>请认真填写，错了不能修改。比如：gh_31a785317770 [<a href="">不会就点我</a>]</td>
 						</tr>
 						<tr>
 							<td>*微信号</td>
-							<td><input name="wxNumber" /></td>
+							<td><input name="wxNumber"
+								value="<%if (wxaccountBean != null)
+					out.print(wxaccountBean.getWxNumber());%>" />
+							</td>
 							<td>比如：Cooosuper</td>
 						</tr>
 						<!-- 						<tr> -->
@@ -158,13 +155,20 @@
 
 						<tr>
 							<td>*token</td>
-							<td><input name="token" /></td>
+							<td><input name="token"
+								value="<%if (wxaccountBean != null)
+					out.print(wxaccountBean.getToken());%>" />
+							</td>
 							<td>此处token和中转接口以及腾讯平台必须一致，为保证你的资源不被他人盗用，可以自己将中转接口的token值改为当前你设定的值!</td>
 						</tr>
 
 						<tr>
 							<td>*地区</td>
-							<td><input name="area" /></td>
+							<td><input name="area"
+								value="<%if (wxaccountBean != null)
+					out.print(wxaccountBean.getArea());
+				wxaccountBean = null;%>" />
+							</td>
 							<td>此处关联公交等本地化查询</td>
 						</tr>
 						<tr>

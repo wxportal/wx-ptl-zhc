@@ -29,23 +29,26 @@
 	wxAccountBean.setArea(area);
 	wxAccountBean.setUser(user);
 
-	if (wxAccountDBService.isWXAccountExist("name", name)
-			|| wxAccountDBService.isWXAccountExist("orgId", orgId)
-			|| wxAccountDBService
-					.isWXAccountExist("wxNumber", wxNumber)
-			|| wxAccountDBService.isWXAccountExist("token", token)) {
+	wxAccountDBService.updateWXAccount(wxAccountBean);
+	request.getSession().setAttribute("delWXaccountStatus", "更新成功");
+	response.sendRedirect("/WXPortal/myWXaccounts.jsp");
+	// 	if (wxAccountDBService.isWXAccountExist("name", name)
+	// 			|| wxAccountDBService.isWXAccountExist("orgId", orgId)
+	// 			|| wxAccountDBService
+	// 					.isWXAccountExist("wxNumber", wxNumber)
+	// 			|| wxAccountDBService.isWXAccountExist("token", token)) {
 
-		request.getSession().setAttribute("addWXaccountStatus",
-				"添加失败，微信帐号名或原始id或微信号或token有重复");
-		response.sendRedirect("/WXPortal/addWXaccount.jsp");
-	} else {
-		if (wxAccountDBService.addWXAccount(wxAccountBean) > 0) {
-			request.getSession().setAttribute("addWXaccountStatus",
-					"添加成功");
-			response.sendRedirect("/WXPortal/addWXaccount.jsp");
-		} else {
-			request.getSession().setAttribute("addWXaccountStatus",
-					"添加失败成功");
-		}
-	}
+	// 		request.getSession().setAttribute("addWXaccountStatus",
+	// 				"添加失败，微信帐号名或原始id或微信号或token有重复");
+	// 		response.sendRedirect("/WXPortal/addWXaccount.jsp");
+	// 	} else {
+	// 		if (wxAccountDBService.addWXAccount(wxAccountBean) > 0) {
+	// 			request.getSession().setAttribute("addWXaccountStatus",
+	// 					"添加成功");
+	// 			response.sendRedirect("/WXPortal/addWXaccount.jsp");
+	// 		} else {
+	// 			request.getSession().setAttribute("addWXaccountStatus",
+	// 					"添加失败成功");
+	// 		}
+	// 	}
 %>

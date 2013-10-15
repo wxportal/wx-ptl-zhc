@@ -25,12 +25,12 @@ public class WXAccountDBService {
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean isWXAccountExist(String column, String value) {
-		boolean bFlag = true;
+		boolean bFlag = false;
 		ArrayList<WXAccountBean> list = new ArrayList<WXAccountBean>();
 		list = (ArrayList<WXAccountBean>) dao.query("WXAccountBean",
 				new String[] { column }, new String[] { value }, 0, 0);
 		if (list.size() > 0)
-			bFlag = false;
+			bFlag = true;
 		return bFlag;
 	}
 
