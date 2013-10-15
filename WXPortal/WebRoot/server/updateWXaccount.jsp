@@ -13,6 +13,8 @@
 	String wxNumber = (String) request.getParameter("wxNumber");
 	String token = (String) request.getParameter("token");
 	String area = (String) request.getParameter("area");
+	String wxaccountid = (String) request.getParameter("wxaccountid");
+	
 	String curPage = (String) request.getParameter("curPage");
 
 	WXAccountDBService wxAccountDBService = new WXAccountDBService();
@@ -22,6 +24,7 @@
 	UserBean user = (UserBean) request.getSession()
 			.getAttribute("user");
 
+	wxAccountBean.setId(new Integer(wxaccountid).intValue());
 	wxAccountBean.setName(name);
 	wxAccountBean.setOrgId(orgId);
 	wxAccountBean.setWxNumber(wxNumber);

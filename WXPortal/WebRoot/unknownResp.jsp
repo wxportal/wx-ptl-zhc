@@ -1,9 +1,16 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="org.wxportal.dbservice.client.*"%>
+<%@ page import="org.wxportal.dao.bean.*"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+			
+	String wxaccountid = (String) request.getParameter("wxaccountid");
+	
+	WXAccountDBService wxAccountDBService = new WXAccountDBService();
+	WXAccountBean wxAccountBean = wxAccountDBService.queryWXAccount(new Integer(wxaccountid).intValue());
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
@@ -86,7 +93,7 @@
 	%>
 
 	<h2>功能管理</h2>
-	<input type="button" onclick="window.location='manage.jsp'"
+	<input type="button" onclick="window.location='myWXaccounts.jsp'"
 		value="返回公众号管理">
 	<br />
 	<br />
@@ -104,10 +111,10 @@
 	%>
 	<table cellpadding="10" cellspacing="0" border="1" width="100%">
 		<tr>
-			<td width="25%">aidanfd <br />微信号:lfdskafkd</td>
-			<td width="25%">vip等级：1级</td>
-			<td width="25%">购买时间：2012年9月10日</td>
-			<td width="25%">到期时间：2013年9月10日</td>
+			<td width="25%">微信名：<%=wxAccountBean.getName() %> </td>
+			<td width="25%">微信号：<%=wxAccountBean.getWxNumber() %></td>
+			<td width="25%">原始id:<%=wxAccountBean.getOrgId() %></td>
+			<td width="25%">token:<%=wxAccountBean.getToken() %></td>
 		</tr>
 		<tr>
 			<td width="20%" valign="top"><table width="100%"
@@ -119,30 +126,30 @@
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="functionManage.jsp">功能选择</a>
+							href="functionManage.jsp?wxaccountid=<%=wxaccountid %>">功能选择</a>
 						</td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="watchedMsg.jsp">关注时回复</a>
+							href="watchedMsg.jsp?wxaccountid=<%=wxaccountid %>">关注时回复</a>
 						</td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="textResp.jsp">自定义文本回复</a>
+							href="textResp.jsp?wxaccountid=<%=wxaccountid %>">自定义文本回复</a>
 						</td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="musicResp.jsp">自定义音乐回复</a></td>
+							href="musicResp.jsp?wxaccountid=<%=wxaccountid %>">自定义音乐回复</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="newsResp.jsp">自定义图文回复</a></td>
+							href="newsResp.jsp?wxaccountid=<%=wxaccountid %>">自定义图文回复</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="unknownResp.jsp"
+							href="unknownResp.jsp?wxaccountid=<%=wxaccountid %>"
 							style="background-color: blue;color: white;">不知道时答复</a>
 						</td>
 					</tr>
@@ -155,7 +162,7 @@
 
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="3GDefine.jsp">3G站设置</a>
+							href="3GDefine.jsp?wxaccountid=<%=wxaccountid %>">3G站设置</a>
 						</td>
 					</tr>
 				</table>

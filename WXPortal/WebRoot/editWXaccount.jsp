@@ -119,7 +119,7 @@
  					null);
  		}
  %>
-				<form action="server/updateWXaccount.jsp" method="post">
+				<form action="server/updateWXaccount.jsp?wxaccountid=<%=wxaccountid %>" method="post">
 					<table width="100%" style="height: 100%;" cellpadding="10px"
 						border="1" cellspacing="0">
 						<tr>

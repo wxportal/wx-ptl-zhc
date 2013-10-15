@@ -7,8 +7,10 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	WXAccountDBService wxAccountDBService = new WXAccountDBService();
+	UserBean user = (UserBean) request.getSession()
+			.getAttribute("user");
 	ArrayList<WXAccountBean> wxAccountBeans = wxAccountDBService
-			.queryWXAccounts(1, 0, 0);
+			.queryWXAccounts(user.getId(), 0, 0);
 	int size = wxAccountBeans.size();
 	System.out.println(size);
 %>
@@ -36,7 +38,8 @@
 					%> 用户尚未登录 <%
 						}
 					%> </span><a href="#" style="float: right;">设为首页&nbsp;&nbsp;</a> <a
-				href="#" style="float: right;">收藏本站&nbsp;&nbsp;</a></td>
+				href="#" style="float: right;">收藏本站&nbsp;&nbsp;</a>
+			</td>
 
 		</tr>
 	</table>
@@ -46,28 +49,22 @@
 		<tr>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="index.jsp">首页</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="manage.jsp">管理</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="introduce.jsp">功能介绍</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="pay.jsp">资费</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="about.jsp">关于</a>
-				</div>
-			</td>
+				</div></td>
 			<td width="35" class="STYLE7"><div align="center">
 					<a href="help.jsp">帮助</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 
@@ -78,8 +75,7 @@
 					<a href="javascript:history.go(-1);">后退</a>&nbsp;<a
 						href="javascript:history.go(1);">前进</a>&nbsp;<a
 						href="javascript:window.parent.location.reload();">刷新</a>
-				</div>
-			</td>
+				</div></td>
 		</tr>
 	</table>
 	<%
@@ -117,20 +113,20 @@
 			<td valign="top"><table width="100%" cellpadding="10">
 					<tr>
 						<td valign="top"><img src="images/menu_point.jpg" />&nbsp;<a
-							href="personInfo.jsp">个人信息</a></td>
-					</tr>
-					<tr>
-						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="myWXaccounts.jsp"
-							style="background-color: blue;color: white;">我的公众帐号</a>
+							href="personInfo.jsp">个人信息</a>
 						</td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="addWXaccount.jsp">添加公众帐号</a></td>
+							href="myWXaccounts.jsp"
+							style="background-color: blue;color: white;">我的公众帐号</a></td>
 					</tr>
-				</table>
-			</td>
+					<tr>
+						<td><img src="images/menu_point.jpg" />&nbsp;<a
+							href="addWXaccount.jsp">添加公众帐号</a>
+						</td>
+					</tr>
+				</table></td>
 			<td>
 				<%
 					if (size <= 0) {
@@ -145,7 +141,8 @@
 				<br /> <%
  	if (request.getSession().getAttribute("delWXaccountStatus") != null) {
  %> <font color="red"><%=request.getSession().getAttribute(
-								"delWXaccountStatus")%></font><br /><br /> <%
+								"delWXaccountStatus")%></font><br />
+			<br /> <%
  	request.getSession().setAttribute("delWXaccountStatus",
  						null);
  			}
@@ -172,11 +169,10 @@
 						<td><input type="button"
 							onclick="window.location='editWXaccount.jsp?wxaccountid=<%=wxAccountBeans.get(i).getId()%>'"
 							value="编辑"><input type="button"
-								onclick="window.location='server/delWXaccount.jsp?wxaccountid=<%=wxAccountBeans.get(i).getId()%>'"
-								value="删除"> <input type="button"
-									onclick="window.location='functionManage.jsp?wxaccountid=<%=wxAccountBeans.get(i).getId()%>'"
-									value="功能管理">
-						</td>
+							onclick="window.location='server/delWXaccount.jsp?wxaccountid=<%=wxAccountBeans.get(i).getId()%>'"
+							value="删除"> <input type="button"
+							onclick="window.location='functionManage.jsp?wxaccountid=<%=wxAccountBeans.get(i).getId()%>'"
+							value="功能管理"></td>
 					</tr>
 					<%
 						}
