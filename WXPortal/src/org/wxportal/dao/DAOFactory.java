@@ -59,7 +59,7 @@ public abstract class DAOFactory {
 	 * @param columns
 	 * @param values
 	 */
-	public abstract List querysByValue(Object Object,String[] columns,String[] values,int page,int pageSize);
+	public abstract List querysByValue(String[] columns,String[] values,int page,int pageSize);
 	
 	/**
 	 * 查询微信账号下的信息
@@ -78,7 +78,7 @@ public abstract class DAOFactory {
 	 * @param pageSize
 	 * @return
 	 */
-	public abstract List queryByCondition(Object object,String whereCause,int page,int pageSize);
+	public abstract List queryByCondition(String whereCause,int page,int pageSize);
 	
 	
 }

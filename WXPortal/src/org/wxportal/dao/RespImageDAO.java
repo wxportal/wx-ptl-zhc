@@ -112,10 +112,9 @@ public class RespImageDAO extends DAOFactory {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List querysByValue(Object object, String[] columns, String[] values,
+	public List querysByValue(String[] columns, String[] values,
 			int page, int pageSize) {
-		RespImageBean bean = (RespImageBean) object;
-		return baseMethod.query(bean, columns, values, page, pageSize);
+		return baseMethod.query("RespImageBean", columns, values, page, pageSize);
 	}
 
 	@Override
@@ -129,7 +128,7 @@ public class RespImageDAO extends DAOFactory {
 	 * 依据拼接好的条件查询
 	 */
 	@Override
-	public List queryByCondition(Object object, String whereCause, int page,
+	public List queryByCondition(String whereCause, int page,
 			int pageSize) {
 		return baseMethod.queryByCondition("RespImageBean", whereCause, page,
 				pageSize);

@@ -18,7 +18,7 @@ public class ObjectDBService {
 	 * 
 	 * @param object
 	 * @param infoType
-	 * @return
+	 * @return i@type:返回值是新增是生成的id和传过来信息的类型
 	 */
 	public String add(Object object, String infoType) {
 		int i = dao.getDAO(infoType).add(object);
@@ -117,5 +117,18 @@ public class ObjectDBService {
 	 */
 	public List querys(int wxAccountId, String infoType, int page, int pageSize) {
 		return dao.getDAO(infoType).querys(wxAccountId, page, pageSize);
+	}
+	
+	/**
+	 * 依据条件查询
+	 * @param object
+	 * @param whereCause
+	 * @param infoType
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public List queryByConditions(String whereCause,String infoType,int page, int pageSize){
+		return dao.getDAO(infoType).queryByCondition(whereCause, page, pageSize);
 	}
 }
