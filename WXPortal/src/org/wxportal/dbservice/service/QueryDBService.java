@@ -56,7 +56,7 @@ public class QueryDBService {
 		if("text".equals(type)){
 			RespTextDAO dao = new RespTextDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			list  = dao.queryByCondition("RespTextBean", whereCause, 0, 0);
+			list  = dao.queryByCondition(whereCause, 0, 0);
 			if(list.size()>0){
 				sFlag = "true";
 				sType = "Text";
@@ -66,7 +66,7 @@ public class QueryDBService {
 		if("music".equals(type)){
 			RespMusicDAO dao = new RespMusicDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			list  = dao.queryByCondition("RespMusicBean", whereCause, 0, 0);
+			list  = dao.queryByCondition(whereCause, 0, 0);
 			if(list.size()>0){
 				sFlag = "true";
 				sType = "Music";
@@ -76,7 +76,7 @@ public class QueryDBService {
 		if("image".equals(type)){
 			RespImageDAO dao = new RespImageDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			list  = dao.queryByCondition("RespImageBean", whereCause, 0, 0);
+			list  = dao.queryByCondition(whereCause, 0, 0);
 			if(list.size()>0){
 				sFlag = "true";
 				sType = "Image";
@@ -86,7 +86,7 @@ public class QueryDBService {
 		if("link".equals(type)){
 			RespLinkDAO dao = new RespLinkDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			list  = dao.queryByCondition("RespLinkBean", whereCause, 0, 0);
+			list  = dao.queryByCondition(whereCause, 0, 0);
 			if(list.size()>0){
 				sFlag = "true";
 				sType = "Link";
@@ -96,7 +96,7 @@ public class QueryDBService {
 		if("news".equals(type)){
 			RespNewsDAO dao = new RespNewsDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			list = dao.queryByCondition("RespNewsBean", whereCause, 0, 0);
+			list = dao.queryByCondition(whereCause, 0, 0);
 			if(list.size()>0){
 				sFlag = "true";
 				sType = "News";
@@ -106,7 +106,7 @@ public class QueryDBService {
 		if("function".equals(type)){
 			RespFunctionDAO dao = new RespFunctionDAO();
 			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
-			list  = dao.queryByCondition("RespFunctionBean", whereCause, 0, 0);
+			list  = dao.queryByCondition(whereCause, 0, 0);
 			if(list.size()>0){
 				sFlag = "true";
 				sType = "Function";
