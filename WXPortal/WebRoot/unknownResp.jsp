@@ -6,11 +6,17 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
-			
+
 	String wxaccountid = (String) request.getParameter("wxaccountid");
-	
+
 	WXAccountDBService wxAccountDBService = new WXAccountDBService();
-	WXAccountBean wxAccountBean = wxAccountDBService.queryWXAccount(new Integer(wxaccountid).intValue());
+	WXAccountBean wxAccountBean = wxAccountDBService
+			.queryWXAccount(new Integer(wxaccountid).intValue());
+
+	RespDBService respDBService = new RespDBService();
+
+	List list = respDBService.getExistRespInfo(
+			new Integer(wxaccountid).intValue(), "关注时回复", "text", 0, 0);
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
@@ -111,10 +117,10 @@
 	%>
 	<table cellpadding="10" cellspacing="0" border="1" width="100%">
 		<tr>
-			<td width="25%">微信名：<%=wxAccountBean.getName() %> </td>
-			<td width="25%">微信号：<%=wxAccountBean.getWxNumber() %></td>
-			<td width="25%">原始id:<%=wxAccountBean.getOrgId() %></td>
-			<td width="25%">token:<%=wxAccountBean.getToken() %></td>
+			<td width="25%">微信名：<%=wxAccountBean.getName()%></td>
+			<td width="25%">微信号：<%=wxAccountBean.getWxNumber()%></td>
+			<td width="25%">原始id:<%=wxAccountBean.getOrgId()%></td>
+			<td width="25%">token:<%=wxAccountBean.getToken()%></td>
 		</tr>
 		<tr>
 			<td width="20%" valign="top"><table width="100%"
@@ -126,30 +132,29 @@
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="functionManage.jsp?wxaccountid=<%=wxaccountid %>">功能选择</a>
+							href="functionManage.jsp?wxaccountid=<%=wxaccountid%>">功能选择</a></td>
+					</tr>
+					<tr>
+						<td><img src="images/menu_point.jpg" />&nbsp;<a
+							href="watchedMsg.jsp?wxaccountid=<%=wxaccountid%>">关注时回复</a>
 						</td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="watchedMsg.jsp?wxaccountid=<%=wxaccountid %>">关注时回复</a>
+							href="textResp.jsp?wxaccountid=<%=wxaccountid%>">自定义文本回复</a>
 						</td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="textResp.jsp?wxaccountid=<%=wxaccountid %>">自定义文本回复</a>
-						</td>
+							href="musicResp.jsp?wxaccountid=<%=wxaccountid%>">自定义音乐回复</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="musicResp.jsp?wxaccountid=<%=wxaccountid %>">自定义音乐回复</a></td>
+							href="newsResp.jsp?wxaccountid=<%=wxaccountid%>">自定义图文回复</a></td>
 					</tr>
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="newsResp.jsp?wxaccountid=<%=wxaccountid %>">自定义图文回复</a></td>
-					</tr>
-					<tr>
-						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="unknownResp.jsp?wxaccountid=<%=wxaccountid %>"
+							href="unknownResp.jsp?wxaccountid=<%=wxaccountid%>"
 							style="background-color: blue;color: white;">不知道时答复</a>
 						</td>
 					</tr>
@@ -162,30 +167,72 @@
 
 					<tr>
 						<td><img src="images/menu_point.jpg" />&nbsp;<a
-							href="3GDefine.jsp?wxaccountid=<%=wxaccountid %>">3G站设置</a>
+							href="3GDefine.jsp?wxaccountid=<%=wxaccountid%>">3G站设置</a>
 						</td>
 					</tr>
 				</table>
 			</td>
-			<td colspan="3" valign="top"><h3>不知道时答复</h3>
+			<td colspan="3" valign="top"><h3>不知道时答复</h3> <%
+ 	if (request.getSession().getAttribute("addUnknownRespStatus") != null) {
+ %> <font color="red"><%=request.getSession().getAttribute(
+							"addUnknownRespStatus")%></font><br /> <br /> <%
+ 	request.getSession().setAttribute("addUnknownRespStatus",
+ 					null);
+ 		}
+ %>
+				<form
+					action="server/addUnknownResp.jsp?wxaccountid=<%=wxaccountid%>"
+					method="post">
+					<table width="100%" style="height: 100%;" cellpadding="10px"
+						border="1" cellspacing="0">
+						<tr>
+							<td>标识：</td>
+							<td><input name="reqChar" /></td>
+							<td>即用户发送内容的简略版本，如【A:天气】，此时用户发送A或者天气都能获取到天气信息，A称作标识</td>
+						</tr>
+						<tr>
+							<td>关键字：</td>
+							<td><input name="reqContent" /></td>
+							<td>即用户发送的内容，如【天气】</td>
+						</tr>
+						<tr>
+							<td>回复内容：</td>
+							<td><input name="unknownRespText" /></td>
+							<td>当用户发送【天气】时，我们会将您配置的回复内容回给用户。</td>
+						</tr>
+						<tr>
+							<td colspan="3" align="center"><input type="submit"
+								value="保存" /></td>
+						</tr>
+					</table>
+				</form>
+
+				<h3>已有配置</h3>
 				<table width="100%" style="height: 100%;" cellpadding="10px"
 					border="1" cellspacing="0">
 					<tr>
-						<td><input />
-						</td>
+						<td>标识</td>
+						<td>关键字</td>
+						<td>回复内容</td>
 					</tr>
-					<tr>
-						<td colspan="1" align="center"><button>保存</button>
-						</td>
-					</tr>
-				</table>
+					<%
+						for (int i = 0; i < ((List) list.get(0)).size(); i++) {
+								List custRespList = (List) list.get(0);
+								CustomRespBean c = (CustomRespBean) custRespList.get(i);
 
-				<h3>已有配置</h3>
-				<table width="100%" style="height: 100%;text-align: center;"
-					cellpadding="10px" border="1" cellspacing="0">
+								List respTextBeanList = (List) list.get(1);
+
+								RespTextBean respTextBean = (RespTextBean) respTextBeanList
+										.get(i);
+					%>
 					<tr>
-						<td>您好，感谢您的支持，回复0可获取主功能菜单</td>
+						<td><%=c.getReqChar()%></td>
+						<td><%=c.getReqContent()%></td>
+						<td><%=respTextBean.getContent()%></td>
 					</tr>
+					<%
+						}
+					%>
 				</table></td>
 		</tr>
 	</table>

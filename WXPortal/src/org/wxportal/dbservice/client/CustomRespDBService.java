@@ -142,7 +142,7 @@ public class CustomRespDBService {
 		if ("".equals(type)) {
 			whereCause = " wxAccountId = " + wxAccountId;
 		} else {
-			whereCause = " where type = '" + type + "' and wxAccountId = "
+			whereCause = " where resptype = '" + type + "' and wxAccountId = "
 					+ wxAccountId;
 		}
 		list = dao.queryCondition("CustomRespBean", whereCause, page, pageSize);

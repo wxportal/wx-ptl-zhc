@@ -9,7 +9,7 @@
 
 	request.setCharacterEncoding("utf-8");
 	String watchedRespText = (String) request
-			.getParameter("watchedRespText");
+			.getParameter("textRespText");
 	String wxaccountid = (String) request.getParameter("wxaccountid");
 
 	String reqChar = (String) request.getParameter("reqChar");
@@ -46,13 +46,13 @@
 
 	if (result != -1) {
 		request.getSession()
-				.setAttribute("addWatchedMsgStatus", "添加成功");
-		response.sendRedirect("/WXPortal/watchedMsg.jsp?wxaccountid="
+				.setAttribute("addTextMsgStatus", "添加成功");
+		response.sendRedirect("/WXPortal/textResp.jsp?wxaccountid="
 				+ wxaccountid);
 	} else {
 		request.getSession()
-				.setAttribute("addWatchedMsgStatus", "添加失败");
-		response.sendRedirect("/WXPortal/watchedMsg.jsp?wxaccountid="
+				.setAttribute("addTextMsgStatus", "添加失败");
+		response.sendRedirect("/WXPortal/textResp.jsp?wxaccountid="
 				+ wxaccountid);
 	}
 %>
