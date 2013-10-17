@@ -16,7 +16,8 @@
 	RespDBService respDBService = new RespDBService();
 
 	ArrayList<RespReturnBean> list = respDBService.getExistRespInfo(
-			new Integer(wxaccountid).intValue(), "watched@unknown", "text", 0, 0);
+			new Integer(wxaccountid).intValue(), "watched@unknown",
+			"text", 0, 0);
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
@@ -182,14 +183,11 @@
 			<td colspan="3" valign="top"><h3>自定义文本回复</h3> <%
  	if (request.getSession().getAttribute("addTextMsgStatus") != null) {
  %> <font color="red"><%=request.getSession().getAttribute(
-							"addTextMsgStatus")%></font><br />
-			<br /> <%
- 	request.getSession().setAttribute("addTextMsgStatus",
- 					null);
+							"addTextMsgStatus")%></font><br /> <br /> <%
+ 	request.getSession().setAttribute("addTextMsgStatus", null);
  		}
  %>
-				<form
-					action="server/addTextResp.jsp?wxaccountid=<%=wxaccountid%>"
+				<form action="server/addTextResp.jsp?wxaccountid=<%=wxaccountid%>"
 					method="post">
 					<table width="100%" style="height: 100%;" cellpadding="10px"
 						border="1" cellspacing="0">
@@ -224,13 +222,12 @@
 						<td>回复内容</td>
 					</tr>
 					<%
-						for (RespReturnBean bean:list) {
-								
+						for (RespReturnBean bean : list) {
 					%>
 					<tr>
-						<td><%=bean.getReqChar() %></td>
+						<td><%=bean.getReqChar()%></td>
 						<td><%=bean.getReqContent()%></td>
-						<td><%=bean.getContent() %></td>
+						<td><%=bean.getContent()%></td>
 					</tr>
 					<%
 						}
