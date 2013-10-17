@@ -135,17 +135,33 @@ public class CustomRespDBService {
 	 *            : 为0 不分页 大于零分页查询
 	 * @return
 	 */
-	public ArrayList<CustomRespBean> queryCustomResps(int wxAccountId,
+	public ArrayList<CustomRespBean> queryCustomResps(String specialTypes,int wxAccountId,
 			String type, int page, int pageSize) {
 		String whereCause = "";
+		String[] specalTypeArray = specialTypes.split("@");
 		ArrayList<CustomRespBean> list = new ArrayList<CustomRespBean>();
 		if ("".equals(type)) {
-			whereCause = " wxAccountId = " + wxAccountId;
+			whereCause = " wxAccountId = " +wxAccountId;
 		} else {
-			whereCause = " where resptype = '" + type + "' and wxAccountId = "
-					+ wxAccountId;
+			whereCause = " where resptype = '" + type + "'";
+			for(String s:specalTypeArray){
+				String s1 = "%"+s;
+				whereCause += " and resptype not like '"+s1+"' ";
+			}
+			whereCause +="and wxAccountId = "+wxAccountId;
 		}
 		list = dao.queryCondition("CustomRespBean", whereCause, page, pageSize);
+		return list;
+	}
+	
+	/**
+	 * 查询特殊回复
+	 * @param whereCause
+	 * @return
+	 */
+	public ArrayList<CustomRespBean> querySpecialResp(String whereCause){
+		ArrayList<CustomRespBean> list = new ArrayList<CustomRespBean>();
+		list = dao.queryCondition("CustomRespBean", whereCause, 0, 0);
 		return list;
 	}
 
