@@ -15,8 +15,11 @@
 
 	RespDBService respDBService = new RespDBService();
 
-	List list = respDBService.getExistRespInfo(
-			new Integer(wxaccountid).intValue(), "关注时回复", "text", 0, 0);
+	ArrayList<RespReturnBean> list = respDBService.getSpecialResp(
+			new Integer(wxaccountid).intValue(), "watched");
+	if (list != null) {
+		System.out.println("大小=" + list.size());
+	}
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
@@ -183,7 +186,7 @@
 			<td colspan="3" valign="top"><h3>关注时回复</h3> <%
  	if (request.getSession().getAttribute("addWatchedMsgStatus") != null) {
  %> <font color="red"><%=request.getSession().getAttribute(
-							"addWatchedMsgStatus")%></font><br /><br /> <%
+							"addWatchedMsgStatus")%></font><br /> <br /> <%
  	request.getSession().setAttribute("addWatchedMsgStatus",
  					null);
  		}
@@ -223,22 +226,17 @@
 						<td>回复内容</td>
 					</tr>
 					<%
-						for (int i = 0; i < ((List) list.get(0)).size(); i++) {
-								List custRespList = (List) list.get(0);
-								CustomRespBean c = (CustomRespBean) custRespList.get(i);
-
-								List respTextBeanList = (List) list.get(1);
-
-								RespTextBean respTextBean = (RespTextBean) respTextBeanList
-										.get(i);
+						if (list != null) {
+								for (RespReturnBean bean : list) {
 					%>
 					<tr>
-						<td><%=c.getReqChar()%></td>
-						<td><%=c.getReqContent()%></td>
-						<td><%=respTextBean.getContent() %></td>
+						<td><%=bean.getReqChar()%></td>
+						<td><%=bean.getReqContent()%></td>
+						<td><%=bean.getContent()%></td>
 					</tr>
 					<%
 						}
+							}
 					%>
 				</table>
 			</td>
