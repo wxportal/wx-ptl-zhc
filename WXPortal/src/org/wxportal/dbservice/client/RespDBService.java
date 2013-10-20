@@ -82,7 +82,6 @@ public class RespDBService {
 			}
 			whereCause = whereCause.substring(0, whereCause.lastIndexOf("or"))+" ) ";
 			whereCause += " and wxAccountid = " + wxAccountId;
-			System.out.println("=========="+whereCause);
 			List list2 = oService.queryByConditions(whereCause, type, 0, 0);
 			ArrayList<RespReturnBean>  returnList = new ArrayList<RespReturnBean>();
 			returnList = this.produceRespReturnBeans(type, list1, list2);
