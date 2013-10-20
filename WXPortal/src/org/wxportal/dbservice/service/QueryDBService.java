@@ -17,7 +17,6 @@ import org.wxportal.dao.RespTextDAO;
  *
  */
 public class QueryDBService {
-   //type:01：text 02：music 03：image 04：link 05:  news 06: cmd
 	
 	/**
 	 * describe:依据用户请求的reqChar或者reqContent 和wxAccountId
@@ -25,11 +24,10 @@ public class QueryDBService {
 	 * @param reqChar
 	 * @param reqContent
 	 * @param wxAccountId
-	 * return 返回一个Map，map的key是依据请求的参数查询到的reqType，
-	 *        map的value是查询到的用户自定义回复类容，如果不是新闻也不是""串
-	 *        则value是一个Bean，是新闻则value是ArrayList<RespNewsBean>,
-	 *        使用时依据reqType将Bean转成对应的类型.
-	 *        否则 key="" value = "error";
+	 * return 返回结果是一个List结果集，list[0]是标识位“true”or"false"，true表示查询到了结果，false表示未查询到结果。
+	 *        list[1]是返回的结果的类型：Text、Music、Image、Link、News、Function
+	 *        list[2]及以后全部是用户自定义回复的内容
+	 *
 	 */
      
 	public List queryInfo(String reqChar,String reqContent,int wxAccountId){
