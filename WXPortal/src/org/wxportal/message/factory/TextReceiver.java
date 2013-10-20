@@ -1,5 +1,6 @@
 package org.wxportal.message.factory;
 
+import java.util.List;
 import java.util.Map;
 
 import org.wxportal.message.db.DBAction;
@@ -18,18 +19,18 @@ public class TextReceiver extends MessageReceiver {
 
 		String senderName = requestMap.get("FromUserName");
 		String content = requestMap.get("Content");
-		Map<String, Object> dbResultMap = DBAction.getRespTypeAndContent(
-				senderName, content);
+		List<Object> dbResultList = DBAction.getRespTypeAndContent(senderName,
+				content);
 		String className = AbstractBaseRespMessage.class.getPackage().getName()
-				+ "." + dbResultMap.get("ReturnType") + "Resp";
+				+ "." + dbResultList.get(1).toString() + "Resp";
 		try {
 			AbstractBaseRespMessage response = (AbstractBaseRespMessage) Class
 					.forName(className).newInstance();
 			response.setCreateTime(System.currentTimeMillis());
 			response.setFromUserName(requestMap.get("ToUserName"));
 			response.setToUserName(senderName);
-			response.setMsgType(dbResultMap.get("ReturnType").toString());
-			return response.handlerData2ReturnXml(dbResultMap);
+			response.setMsgType(dbResultList.get(1).toString());
+			return response.handlerData2ReturnXml(dbResultList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
