@@ -34,7 +34,7 @@ public class MessageFactory {
 			String typeStr = msgType.substring(0, 1).toUpperCase()
 					+ msgType.substring(1);
 			String className = MessageFactory.class.getPackage().getName()
-					+ "." + typeStr + "Maker";
+					+ "." + typeStr + "Receiver";
 
 			// new instance some object and get the result
 			MessageReceiver maker = (MessageReceiver) Class.forName(className)
