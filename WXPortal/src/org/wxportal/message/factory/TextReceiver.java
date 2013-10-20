@@ -21,16 +21,29 @@ public class TextReceiver extends MessageReceiver {
 		String content = requestMap.get("Content");
 		List<Object> dbResultList = DBAction.getRespTypeAndContent(senderName,
 				content);
-		String className = AbstractBaseRespMessage.class.getPackage().getName()
-				+ "." + dbResultList.get(1).toString() + "Resp";
+		String className = "";
+		boolean dbSearchSuccessFlag = false;
+		if (dbResultList.size() < 3) {
+			className = AbstractBaseRespMessage.class.getPackage().getName()
+					+ "." + "Text" + "Resp";
+		} else {
+			dbSearchSuccessFlag = true;
+			className = AbstractBaseRespMessage.class.getPackage().getName()
+					+ "." + dbResultList.get(1).toString() + "Resp";
+		}
 		try {
 			AbstractBaseRespMessage response = (AbstractBaseRespMessage) Class
 					.forName(className).newInstance();
 			response.setCreateTime(System.currentTimeMillis());
 			response.setFromUserName(requestMap.get("ToUserName"));
 			response.setToUserName(senderName);
-			response.setMsgType(dbResultList.get(1).toString());
-			return response.handlerData2ReturnXml(dbResultList,response);
+			if (dbSearchSuccessFlag) {
+				response.setMsgType(dbResultList.get(1).toString());
+			} else {
+				className = AbstractBaseRespMessage.class.getPackage()
+						.getName() + "." + "Text" + "Resp";
+			}
+			return response.handlerData2ReturnXml(dbResultList, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
