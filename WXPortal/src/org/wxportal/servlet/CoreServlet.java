@@ -42,6 +42,7 @@ public class CoreServlet extends HttpServlet {
 
 		// 调用核心业务类接收消息、处理消息
 		String respMessage = CoreService.processRequest(request);
+		System.out.println(respMessage);
 
 		// 响应消息
 		PrintWriter out = response.getWriter();
