@@ -41,7 +41,8 @@ public class MusicResp extends AbstractBaseRespMessage {
 	}
 
 	@Override
-	public String handlerData2ReturnXml(List<Object> dbResultList) {
+	public String handlerData2ReturnXml(List<Object> dbResultList,
+			AbstractBaseRespMessage response) {
 		// TODO Auto-generated method stub
 		return null;
 	}

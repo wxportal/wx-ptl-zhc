@@ -10,7 +10,8 @@ public abstract class AbstractBaseRespMessage {
 	 * @param mes
 	 * @return
 	 */
-	public abstract String handlerData2ReturnXml(List<Object> dbResultList);
+	public abstract String handlerData2ReturnXml(List<Object> dbResultList,
+			AbstractBaseRespMessage response);
 
 	private String ToUserName;
 	private String FromUserName;
