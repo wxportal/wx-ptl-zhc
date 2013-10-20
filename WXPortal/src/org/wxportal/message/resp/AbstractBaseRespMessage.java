@@ -1,6 +1,6 @@
 package org.wxportal.message.resp;
 
-import java.util.Map;
+import java.util.List;
 
 public abstract class AbstractBaseRespMessage {
 
@@ -10,7 +10,7 @@ public abstract class AbstractBaseRespMessage {
 	 * @param mes
 	 * @return
 	 */
-	public abstract String handlerData2ReturnXml(Map<String, Object> requestMap);
+	public abstract String handlerData2ReturnXml(List<Object> dbResultList);
 
 	private String ToUserName;
 	private String FromUserName;

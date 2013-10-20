@@ -1,7 +1,6 @@
 package org.wxportal.message.resp;
 
 import java.util.List;
-import java.util.Map;
 
 public class NewsResp extends AbstractBaseRespMessage {
 	private int ArticleCount;
@@ -24,7 +23,7 @@ public class NewsResp extends AbstractBaseRespMessage {
 	}
 
 	@Override
-	public String handlerData2ReturnXml(Map<String, Object> requestMap) {
+	public String handlerData2ReturnXml(List<Object> dbResultList) {
 		// TODO Auto-generated method stub
 		return null;
 	}

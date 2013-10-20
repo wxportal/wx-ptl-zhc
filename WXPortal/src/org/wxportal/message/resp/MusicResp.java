@@ -1,6 +1,6 @@
 package org.wxportal.message.resp;
 
-import java.util.Map;
+import java.util.List;
 
 public class MusicResp extends AbstractBaseRespMessage {
 	private String Title;
@@ -41,7 +41,7 @@ public class MusicResp extends AbstractBaseRespMessage {
 	}
 
 	@Override
-	public String handlerData2ReturnXml(Map<String, Object> requestMap) {
+	public String handlerData2ReturnXml(List<Object> dbResultList) {
 		// TODO Auto-generated method stub
 		return null;
 	}

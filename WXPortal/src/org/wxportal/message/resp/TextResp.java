@@ -1,6 +1,6 @@
 package org.wxportal.message.resp;
 
-import java.util.Map;
+import java.util.List;
 
 public class TextResp extends AbstractBaseRespMessage {
 	private String Content;
@@ -14,7 +14,7 @@ public class TextResp extends AbstractBaseRespMessage {
 	}
 
 	@Override
-	public String handlerData2ReturnXml(Map<String, Object> requestMap) {
+	public String handlerData2ReturnXml(List<Object> dbResultList) {
 		return null;
 	}
 }
