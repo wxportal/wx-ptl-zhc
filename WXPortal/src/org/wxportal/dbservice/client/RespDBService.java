@@ -76,12 +76,13 @@ public class RespDBService {
 				.querySpecial(specialType, wxAccountId);
 		if (list1.size() > 0) {
 			String type = "text";// 特殊回复的类型暂定为文本
-			String whereCause = " 1=1 and (";
+			String whereCause = " where 1=1 and (";
 			for (CustomRespBean bean : list1) {
 				whereCause += " reqKey = '" + bean.getReqKey() + "' or ";
 			}
-			whereCause = whereCause.substring(0, whereCause.lastIndexOf("or"));
+			whereCause = whereCause.substring(0, whereCause.lastIndexOf("or"))+" ) ";
 			whereCause += " and wxAccountid = " + wxAccountId;
+			System.out.println("=========="+whereCause);
 			List list2 = oService.queryByConditions(whereCause, type, 0, 0);
 			ArrayList<RespReturnBean>  returnList = new ArrayList<RespReturnBean>();
 			returnList = this.produceRespReturnBeans(type, list1, list2);
