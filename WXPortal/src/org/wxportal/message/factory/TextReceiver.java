@@ -30,7 +30,7 @@ public class TextReceiver extends MessageReceiver {
 			response.setFromUserName(requestMap.get("ToUserName"));
 			response.setToUserName(senderName);
 			response.setMsgType(dbResultList.get(1).toString());
-			return response.handlerData2ReturnXml(dbResultList);
+			return response.handlerData2ReturnXml(dbResultList,response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
