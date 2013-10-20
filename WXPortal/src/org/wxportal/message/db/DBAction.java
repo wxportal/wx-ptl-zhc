@@ -1,6 +1,7 @@
 package org.wxportal.message.db;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class DBAction {
@@ -18,9 +19,10 @@ public class DBAction {
 	 * @param content
 	 * @return
 	 */
-	public static Map<String, Object> getRespTypeAndContent(String userName,
+	public static List<Object> getRespTypeAndContent(String userName,
 			String content) {
 		// Need add search DB method
-		return new HashMap<String, Object>();
+		List<Object> list = null;
+		return list;
 	}
 }
