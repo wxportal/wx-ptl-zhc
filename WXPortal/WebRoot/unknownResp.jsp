@@ -16,7 +16,7 @@
 	RespDBService respDBService = new RespDBService();
 
 	ArrayList<RespReturnBean> list = respDBService.getSpecialResp(
-			new Integer(wxaccountid).intValue(), "unknow");
+			new Integer(wxaccountid).intValue(), "unknown");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">

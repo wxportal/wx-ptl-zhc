@@ -22,7 +22,7 @@
 	CustomRespBean customRespBean = new CustomRespBean();
 	customRespBean.setReqChar(reqChar);
 	customRespBean.setReqContent(reqContent);
-	customRespBean.setRespType("text@unknow");
+	customRespBean.setRespType("text@unknown");
 	customRespBean.setWxAccount(wxAccountDBService
 			.queryWXAccount(new Integer(wxaccountid).intValue()));
 
