@@ -8,7 +8,9 @@
 			+ path + "/";
 
 	String wxaccountid = (String) request.getParameter("wxaccountid");
-
+	if(wxaccountid == null){
+	   wxaccountid = "0";//当用户未登录时，给定一个不存在的微信id
+	}
 	WXAccountDBService wxAccountDBService = new WXAccountDBService();
 	WXAccountBean wxAccountBean = wxAccountDBService
 			.queryWXAccount(new Integer(wxaccountid).intValue());
