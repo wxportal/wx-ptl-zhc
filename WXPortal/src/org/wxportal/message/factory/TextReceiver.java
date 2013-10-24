@@ -3,6 +3,7 @@ package org.wxportal.message.factory;
 import java.util.List;
 import java.util.Map;
 
+import org.wxportal.dao.bean.RespTextBean;
 import org.wxportal.message.db.DBAction;
 import org.wxportal.message.resp.AbstractBaseRespMessage;
 
@@ -22,27 +23,22 @@ public class TextReceiver extends MessageReceiver {
 		List<Object> dbResultList = DBAction.getRespTypeAndContent(senderName,
 				content);
 		String className = "";
-		boolean dbSearchSuccessFlag = false;
-		if (dbResultList.size() < 3) {
-			className = AbstractBaseRespMessage.class.getPackage().getName()
-					+ "." + "Text" + "Resp";
-		} else {
-			dbSearchSuccessFlag = true;
-			className = AbstractBaseRespMessage.class.getPackage().getName()
-					+ "." + dbResultList.get(1).toString() + "Resp";
+		if ("false".equals(dbResultList.get(0).toString())
+				|| "false" == dbResultList.get(0).toString()) {
+			dbResultList.clear();
+			dbResultList.add(false);
+			dbResultList.add("Text");
+			dbResultList.add(new RespTextBean(0, "", "输入有误,请输入正确的指令.", 0));
 		}
 		try {
+			className = AbstractBaseRespMessage.class.getPackage().getName()
+					+ "." + dbResultList.get(1).toString() + "Resp";
 			AbstractBaseRespMessage response = (AbstractBaseRespMessage) Class
 					.forName(className).newInstance();
 			response.setCreateTime(System.currentTimeMillis());
 			response.setFromUserName(requestMap.get("ToUserName"));
 			response.setToUserName(senderName);
-			if (dbSearchSuccessFlag) {
-				response.setMsgType(dbResultList.get(1).toString());
-			} else {
-				className = AbstractBaseRespMessage.class.getPackage()
-						.getName() + "." + "Text" + "Resp";
-			}
+			response.setMsgType(dbResultList.get(1).toString());
 			return response.handlerData2ReturnXml(dbResultList, response);
 		} catch (Exception e) {
 			e.printStackTrace();

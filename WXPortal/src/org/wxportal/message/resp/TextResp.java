@@ -21,14 +21,8 @@ public class TextResp extends AbstractBaseRespMessage {
 			AbstractBaseRespMessage response) {
 		TextResp textResponse = new TextResp();
 		textResponse = (TextResp) response;
-		if ("true".equals(dbResultList.get(0).toString())
-				|| "true" == dbResultList.get(0).toString()) {
-			RespTextBean textObject = (RespTextBean) dbResultList.get(2);
-			textResponse.setContent(textObject.getContent());
-			return MessageUtil.textMessageToXml(textResponse);
-		} else {
-			textResponse.setContent("输入有误,请输入正确的指令。");
-			return MessageUtil.textMessageToXml(textResponse);
-		}
+		RespTextBean textObject = (RespTextBean) dbResultList.get(2);
+		textResponse.setContent(textObject.getContent());
+		return MessageUtil.textMessageToXml(textResponse);
 	}
 }
