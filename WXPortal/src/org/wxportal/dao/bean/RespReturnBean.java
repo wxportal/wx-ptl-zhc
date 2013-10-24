@@ -11,6 +11,14 @@ public class RespReturnBean {
 	
 	private String reqContent;
 	
+	private String title;
+	
+	private String description;
+	
+	private String realUrl;
+	
+	private String linkUrl;
+	
 	private String content;
 
 	public String getReqChar() {
@@ -35,6 +43,39 @@ public class RespReturnBean {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+	public String getLinkUrl() {
+		return linkUrl;
+	}
+
+	public void setLinkUrl(String linkUrl) {
+		this.linkUrl = linkUrl;
+	}
+
+	public String getRealUrl() {
+		return realUrl;
+	}
+
+	public void setRealUrl(String realUrl) {
+		this.realUrl = realUrl;
 	}
 	
 	
