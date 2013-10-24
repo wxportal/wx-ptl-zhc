@@ -24,9 +24,11 @@ public class QueryDBService {
 	 * @param reqChar
 	 * @param reqContent
 	 * @param wxAccountId
-	 * return 返回结果是一个List结果集，list[0]是标识位“true”or"false"，true表示查询到了结果，false表示未查询到结果。
+	 * return 返回结果是一个List结果集，list[0]是标识位“true”or"false"，true表示查询到了结果，false表示未查询到结果，默认回复‘不知道时回复’
 	 *        list[1]是返回的结果的类型：Text、Music、Image、Link、News、Function
 	 *        list[2]及以后全部是用户自定义回复的内容
+	 *        当问查询到结果时，默认返回”不知道时回复“，此时list[0] 表示为”false“ list[1]为Text list[2]为不知道是回复的内容 
+	 *        如果list[0]为false ，list[1]为空 :则说明用户‘不知道时回复也没有配置’，此时用此接口的用户可以再前端写一句默认的返回语句。
 	 *
 	 */
      
@@ -34,9 +36,14 @@ public class QueryDBService {
 		String s = StringType.getType(reqChar, reqContent, wxAccountId);
 		String sTyep = "";
 		String reqKey = "";
-		if(s.contains("@")){
-			sTyep = s.split("@")[0];
-			reqKey = s.split("@")[1];
+		String[] sReturn = s.split("@");
+		if(sReturn.length == 2){
+			sTyep = sReturn[0];
+			reqKey = sReturn[1];
+		}
+		if(sReturn.length == 3){
+			sTyep = "text@unknow";
+			reqKey = sReturn[2];
 		}
 		return this.query(wxAccountId, sTyep, reqKey);
 	}
@@ -111,6 +118,16 @@ public class QueryDBService {
 			}
 			return this.toList(list, sType, sFlag);
 		}
+		if("text@unknow".equals(type)){//不知道时回复
+			RespTextDAO dao = new RespTextDAO();
+			String whereCause = " where reqKey = '"+reqKey+"' and wxAccountId = "+wxAccountId;
+			list  = dao.queryByCondition(whereCause, 0, 0);
+			if(list.size()>0){
+				sFlag = "false";
+				sType = "Text";
+			}
+			return this.toList(list, type, sFlag);
+		}
  		return this.toList(list, sType, sFlag);
 	}
 	
@@ -132,7 +149,16 @@ public class QueryDBService {
 			}
 		}
 		return result;
+	}
+	
+	/**
+	 * 当没有返回结果时候，默认返回配置的不知道时回复
+	 * @param wxAccountId
+	 * @return
+	 */
+	private List queryUnknowResp(int wxAccountId){
 		
+		return null;
 	}
 	
 }

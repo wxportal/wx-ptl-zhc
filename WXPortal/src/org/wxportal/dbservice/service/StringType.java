@@ -48,10 +48,21 @@ public class StringType {
 		String type = list.get(0).getRespType();
 		String reqKey = list.get(0).getReqKey();
 		return type+"@"+reqKey;
-		}else{
-			return "";
+		}else{//不知道时回复
+			Session session2 = HibernateSessionFactory.getSession();
+			String hql2 = " from CustomRespBean b where b.respType = 'text@unknow' and b.wxAccount.id = "+wxAccountId;
+			session2.beginTransaction();
+			Query query2 = session.createQuery(hql2);
+			list = (ArrayList<CustomRespBean>)query.list();
+			session2.getTransaction().commit();
+			session2.close();
+			if(list.size()>0){
+				return "text@unknow@"+list.get(0).getReqKey();
+			}else{
+				return "";
+			}
+			
 		}
-		
 	}
 	
 }
