@@ -39,7 +39,10 @@ public class TextReceiver extends MessageReceiver {
 			response.setFromUserName(requestMap.get("ToUserName"));
 			response.setToUserName(senderName);
 			response.setMsgType(dbResultList.get(1).toString());
-			return response.handlerData2ReturnXml(dbResultList, response);
+			if (dbResultList.size() >= 3)
+				return response.handlerData2ReturnXml(dbResultList, response);
+			else
+				return "";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
