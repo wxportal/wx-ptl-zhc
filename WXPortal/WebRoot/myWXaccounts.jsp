@@ -161,7 +161,6 @@
 					%>
 					<tr>
 						<td><%=wxAccountBeans.get(i).getName()%></td>
-						</td>
 						<td><%=wxAccountBeans.get(i).getOrgId()%></td>
 						<td><%=wxAccountBeans.get(i).getWxNumber()%></td>
 						<td><%=wxAccountBeans.get(i).getToken()%></td>
