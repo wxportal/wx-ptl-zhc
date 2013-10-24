@@ -136,7 +136,7 @@ public class RespDBService {
 			for(Object object:ObjectList){
 				RespTextBean text = (RespTextBean)object;
 				for(CustomRespBean bean:(ArrayList<CustomRespBean>)CustomRespList){
-					if(text.getReqKey().equals(bean.getReqKey())){
+					if(text.getReqKey()!=null && text.getReqKey().equals(bean.getReqKey())){
 						RespReturnBean returnBean = new RespReturnBean();
 						returnBean.setContent(text.getContent());
 						returnBean.setReqChar(bean.getReqChar());
@@ -151,11 +151,14 @@ public class RespDBService {
 			for(Object object:ObjectList){
 				RespMusicBean text = (RespMusicBean)object;
 				for(CustomRespBean bean:(ArrayList<CustomRespBean>)CustomRespList){
-					if(text.getReqKey().equals(bean.getReqKey())){
+					if(text.getReqKey()!=null && text.getReqKey().equals(bean.getReqKey())){
 						RespReturnBean returnBean = new RespReturnBean();
-						returnBean.setContent(text.getContent());
 						returnBean.setReqChar(bean.getReqChar());
 						returnBean.setReqContent(bean.getReqContent());
+						returnBean.setDescription(text.getDescription());
+						returnBean.setLinkUrl(text.getLinkUrl());
+						returnBean.setTitle(text.getTitle());
+						returnBean.setRealUrl(text.getRealUrl());
 						list.add(returnBean);
 					}
 				}
@@ -165,7 +168,7 @@ public class RespDBService {
 			for(Object object:ObjectList){
 				RespImageBean text = (RespImageBean)object;
 				for(CustomRespBean bean:(ArrayList<CustomRespBean>)CustomRespList){
-					if(text.getReqKey().equals(bean.getReqKey())){
+					if(text.getReqKey()!=null && text.getReqKey().equals(bean.getReqKey())){
 						RespReturnBean returnBean = new RespReturnBean();
 						returnBean.setContent(text.getContent());
 						returnBean.setReqChar(bean.getReqChar());
@@ -179,7 +182,7 @@ public class RespDBService {
 			for(Object object:ObjectList){
 				RespLinkBean text = (RespLinkBean)object;
 				for(CustomRespBean bean:(ArrayList<CustomRespBean>)CustomRespList){
-					if(text.getReqKey().equals(bean.getReqKey())){
+					if(text.getReqKey()!=null && text.getReqKey().equals(bean.getReqKey())){
 						RespReturnBean returnBean = new RespReturnBean();
 						returnBean.setContent(text.getContent());
 						returnBean.setReqChar(bean.getReqChar());
@@ -189,15 +192,18 @@ public class RespDBService {
 				}
 			}
 		}
-		if("news".equals(type)){//新闻特殊处理，暂不处理
+		if("news".equals(type)){
 			for(Object object:ObjectList){
 				RespNewsBean text = (RespNewsBean)object;
 				for(CustomRespBean bean:(ArrayList<CustomRespBean>)CustomRespList){
-					if(text.getReqKey().equals(bean.getReqKey())){
+					if(text.getReqKey()!=null && text.getReqKey().equals(bean.getReqKey())){
 						RespReturnBean returnBean = new RespReturnBean();
-						returnBean.setContent(text.getDescription());
 						returnBean.setReqChar(bean.getReqChar());
 						returnBean.setReqContent(bean.getReqContent());
+						returnBean.setDescription(text.getDescription());
+						returnBean.setRealUrl(text.getPicUrl());
+						returnBean.setTitle(text.getTitle());
+						returnBean.setLinkUrl(text.getLinkUrl());
 						list.add(returnBean);
 					}
 				}
@@ -207,7 +213,7 @@ public class RespDBService {
 			for(Object object:ObjectList){
 				RespFunctionBean text = (RespFunctionBean)object;
 				for(CustomRespBean bean:(ArrayList<CustomRespBean>)CustomRespList){
-					if(text.getReqKey().equals(bean.getReqKey())){
+					if(text.getReqKey()!=null && text.getReqKey().equals(bean.getReqKey())){
 						RespReturnBean returnBean = new RespReturnBean();
 						returnBean.setContent(text.getContent());
 						returnBean.setReqChar(bean.getReqChar());
