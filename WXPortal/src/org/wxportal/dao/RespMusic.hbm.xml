@@ -35,7 +35,10 @@
             <generator class="increment"/>
         </id>
         <property name="reqKey" type="java.lang.String" column="reqkey"/>
-        <property name="Content" type="java.lang.String" column="content"/>
+        <property name="title" type="java.lang.String" column="tilte"/>
+        <property name="description" type="java.lang.String" column="description"/>
+        <property name="linkUrl" type="java.lang.String" column="linkurl"/>
+        <property name="realUrl" type="java.lang.String" column="realurl"/>
         <property name="wxAccountId" type="java.lang.Integer" column="wxaccountid"/>
     </class>
 
